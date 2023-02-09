@@ -1,4 +1,12 @@
 
+
+.containerFooter {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+
 .footer {
     background-color: lightgrey;
     display: flex;

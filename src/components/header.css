@@ -1,8 +1,83 @@
 header {
-  border-bottom: 1px solid lightgrey;
-  height: 60px; 
-  width: 100vw; 
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+	border-bottom: 1px solid lightgrey;
+	height: 70px;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+}
+
+a > img {
+margin-left: 30px; 
+/*border: 2px solid #e61717;*/
+}
+
+.containerResearch {
+	/* background-color: #e61717; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 60%;
+}
+
+.inputSearch,
+.headerSelect {
+	background-color: #f2f2f2;
+	border: none;
+	outline: none;
+	width: 120px;
+	height: 40px;
+}
+
+.iconSearch {
+	background-color: #f2f2f2;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	border-left: #f2f2f2;
+	padding: 0 15px 0 15px;
+}
+
+.inputSearch {
+	width: 300px;
+}
+
+.containerButttons {
+	/*background-color: #e61717; */
+	width: 60%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.headerButton {
+	width: 125px;
+	height: 35px;
+	border: 1px solid #09adb6;
+	background-color: #ffffff;
+	color: #09adb6;
+	border-radius: 5px;
+	font-size: 18px;
+}
+
+.headerButtonSell {
+	width: 155px;
+	height: 35px;
+	border: 1px solid #09adb6;
+	background-color: #09adb6;
+	color: #ffffff;
+	border-radius: 5px;
+	font-size: 18px;
+}
+
+.Button {
+	height: 35px;
+	width: 320px;
+	border: 1px solid #09adb6;
+	border-radius: 5px;
+	background-color: #09adb6;
+	color: white;
+	font-size: 20px;
+	font-weight: 500;
+	cursor: pointer;
 }

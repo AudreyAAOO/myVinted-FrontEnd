@@ -1,0 +1,64 @@
+
+.offer {
+    display: flex;
+    
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* RIGHT COLUMN **************************** */
+
+.offerPrice {
+	font-size: 28px;
+    margin: 20px 0 ;
+}
+
+.offerDetails {
+	font-size: 20px;
+	color: #666666;
+    /* display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 10px; */
+}
+.clé {
+	font-size: 20px;
+	color: #666666;
+}
+
+.contenu {
+	font-weight: 700;
+   
+}
+
+.offerName {
+	font-size: 25px;
+	font-weight: 700;
+	color: black;
+    margin: 20px 0;
+}
+.offerDescription {
+	font-size: 20px;
+	color: #666666;
+    margin-bottom: 20px;
+}
+
+.offerAvatar {
+	font-size: 28px;
+	display: flex;
+	align-items: center;
+	background-color: rgb(255, 255, 255);
+    margin-bottom: 40px;
+}
+
+.offerAvatar > img {
+	height: 55px;
+	width: 55px;
+	object-fit: cover;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
