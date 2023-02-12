@@ -53,8 +53,8 @@ export default function Home() {
         <h1>Articles populaires</h1>
         <main className="main">
             {data.offers.map((offer) => {
-                //console.log(offer._id);
-                //console.log(offer.product_name);
+                console.log("offer_id", offer._id);
+                console.log("offer_product_name", offer.product_name);
                 return (<OfferCard offerInfos={offer} key={offer._id} />
                 );
             })}
