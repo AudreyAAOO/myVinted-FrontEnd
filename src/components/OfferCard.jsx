@@ -56,12 +56,13 @@ const OfferCard = ({ offerInfos }) => {
 					</div>
 
 					<div className="card">
-						{
+						{offerInfos.product_image.secure_url && (
 							<img
 								src={offerInfos.product_image.secure_url}
 								alt={offerInfos.title}
 							/>
-						}
+						)}
+
 						{console.log("--- product_image:", offerInfos.product_image)}
 						{console.log(
 							"+++ product_image.secure_url:",
