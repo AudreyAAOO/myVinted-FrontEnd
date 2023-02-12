@@ -26,18 +26,22 @@ export default function Home() {
                     // 'https://site--myvinted--hw4gvwsxlwd5.code.run/offers'
                     "https://lereacteur-vinted-api.herokuapp.com/offers"
                 );
-                //console.log(response.data);
+                console.log(response.data);
                 // Je stocke le résultat dans data
                 setData(response.data);
                 // Je fais paser isLoading à false
                 setIsLoading(false);
+
             } catch (error) {
                 console.log(error.message);
             }
         };
 
         fetchData();
+
+
     }, []); //todo ne pas oublier le tableau vide
+
     //! RENDER
     return isLoading ? (
         <p>
@@ -52,7 +56,7 @@ export default function Home() {
         </section>
         <h1>Articles populaires</h1>
         <main className="main">
-            {data.offers.map((offer) => {
+            {data.offers && data.offers.map((offer) => {
                 console.log("offer_id", offer._id);
                 console.log("offer_product_name", offer.product_name);
                 return (<OfferCard offerInfos={offer} key={offer._id} />
