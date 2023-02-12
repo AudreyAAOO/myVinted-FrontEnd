@@ -56,8 +56,17 @@ const OfferCard = ({ offerInfos }) => {
 					</div>
 
 					<div className="card">
-
-						{<img src={offerInfos.product_image.secure_url} alt={offerInfos.title}/>}
+						{
+							<img
+								src={offerInfos.product_image.secure_url}
+								alt={offerInfos.title}
+							/>
+						}
+						{console.log("--- product_image:", product_image)}
+						{console.log(
+							"+++ product_image.secure_url:",
+							product_image.secure_url
+						)}
 					</div>
 
 					<div className="legend-article">
