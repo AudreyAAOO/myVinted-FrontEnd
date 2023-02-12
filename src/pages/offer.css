@@ -64,11 +64,12 @@
 	color: #666666;
 }
 
-.contenu {
+/* .contenu {
 	/* background-color: #b9fa69; */
 	/* position:absolute; */
-	/* left:50%; */
-}
+	/* left:50%; 
+} */
+
 .divOfferDetails:nth-child(n) {
 	/* background-color: #c9c2dd;
 	border: 2px solid #fe24e5; */

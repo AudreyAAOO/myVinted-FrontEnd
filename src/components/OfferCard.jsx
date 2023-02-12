@@ -12,52 +12,54 @@ const OfferCard = ({ offerInfos }) => {
 	// 	event.preventDefault();
 	// 	setErrorMsg(""); // Je fais disparaitre le message d'erreur
 
-		// try {
-		// 	//   Requête axios :
-		// 	// - Premier argument : l'url que j'interroge
-		// 	// - deuxième : le body que j'envoie
+	// try {
+	// 	//   Requête axios :
+	// 	// - Premier argument : l'url que j'interroge
+	// 	// - deuxième : le body que j'envoie
 
-		// 	const response = axios.get(
-		// 		`https://lereacteur-vinted-api.herokuapp.com/offers`,
+	// 	const response = axios.get(
+	// 		`https://lereacteur-vinted-api.herokuapp.com/offers`,
 
-		// 		{
-		// 			title: String,
-		// 			priceMin: Number,
-		// 			priceMax: Number,
-		// 			sort: "price-desc" || "price-asc",
-		// 			page: Number,
-		// 			limit: Number,
-		// 		}
-		// 	);
+	// 		{
+	// 			title: String,
+	// 			priceMin: Number,
+	// 			priceMax: Number,
+	// 			sort: "price-desc" || "price-asc",
+	// 			page: Number,
+	// 			limit: Number,
+	// 		}
+	// 	);
 
-		// 	console.log("response.status", response.data);
-		// } catch (error) {
-		// 	console.log("error.response.data", error.response.data);
-		// 	console.log("error.response.status", error.response.status);
-		// }
-
+	// 	console.log("response.status", response.data);
+	// } catch (error) {
+	// 	console.log("error.response.data", error.response.data);
+	// 	console.log("error.response.status", error.response.status);
+	// }
 
 	return (
 		<>
-			<Link to={`/offer/${offerInfos._id}`} style={{ textDecoration: "none" }}>
+			<Link to={`/offer/${offerInfos._id}`}>
 				<section className="offerCard">
 					<div className="avatarCard">
 						{/* Si le vendeur a un avatar, je l'affiche */}
 						{offerInfos.owner.account.avatar ? (
 							<img
 								src={offerInfos.owner.account.avatar.secure_url}
-								alt="owner"
+								alt={offerInfos.product_name}
 							/>
 						) : (
 							// {/* Sinon je mets un avatar par défault */}
 							<img src={userEmptyState} alt="owner" />
 						)}
 
-						<span>{offerInfos.owner.account.username}</span>
+						<span>{offerInfos && offerInfos.owner.account.username}</span>
 					</div>
+
 					<div className="card">
-						{<img src={offerInfos.product_image.secure_url} alt="product" />}
+
+						{<img src={offerInfos.product_image.secure_url} alt={offerInfos.title}/>}
 					</div>
+
 					<div className="legend-article">
 						<span className="price">
 							<p>{offerInfos.product_price} €</p>

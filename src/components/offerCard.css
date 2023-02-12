@@ -1,7 +1,6 @@
-/* Link {
-	/* background-color: rgb(219, 29, 29);  marchepas */
-	/* text-decoration: none; }*/
-
+a {
+	text-decoration: none;
+}
 
 .offerCard {
 	/*border: 1px solid black;*/
@@ -26,7 +25,7 @@
 	width: 50px;
 	object-fit: cover;
 	border-radius: 50%;
-    margin-right: 10px;
+	margin-right: 10px;
 }
 
 .card > img {
@@ -50,14 +49,13 @@
 	width: 100%;
 	font-size: 14px;
 	line-height: 18px;
-    color: black;
+	color: black;
 	display: flex;
 	justify-content: space-between;
-    /*background-color: rgb(249, 59, 59);*/
-	
+	/*background-color: rgb(249, 59, 59);*/
 }
 
 .description {
-	color: #757575; 
-    font-size: 12px;
+	color: #757575;
+	font-size: 12px;
 }
