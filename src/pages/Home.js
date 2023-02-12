@@ -2,7 +2,8 @@ import "./home.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-import heroBanner from "../assets/img/herobanner.jpg";
+import hero from "../assets/img/hero.svg";
+import herobanner from "../assets/img/hero-img-fond.jpg";
 
 //import des components
 import OfferCard from "../components/OfferCard";
@@ -21,6 +22,7 @@ export default function Home() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
+                    //'http://site--myvinted--hw4gvwsxlwd5.code.run/user/'
                     "https://lereacteur-vinted-api.herokuapp.com/offers"
                 );
                 //console.log(response.data);
@@ -35,14 +37,16 @@ export default function Home() {
 
         fetchData();
     }, []); //todo ne pas oublier le tableau vide
-//! RENDER
+    //! RENDER
     return isLoading ? (
         <p>
             Loading...
         </p>
     ) : (<>
         <section className="sectionHero">
-            <img src={heroBanner} alt="bannière" />
+            <img className="banniere" src={herobanner} alt="bannière" />
+            <img className="whiteEffect" src={hero} alt="effet déchiré" />
+
 
         </section>
         <h1>Articles populaires</h1>

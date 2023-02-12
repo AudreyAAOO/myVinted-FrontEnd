@@ -64,8 +64,12 @@ const Offer = () => {
           //console.log(detail[key]);
           return (<>
             <div key={index} className="offerDetails">
-              <span className="clé">{key} : </span> {/* J'affiche le nom dela clef  */}
-              <span className="contenu">{detail[key]}</span> {/* et son contenu */}
+
+              <div className="divOfferDetails">
+                <span className="clé">{key} : </span> {/* J'affiche le nom dela clef  */}
+              </div>
+              <div> <span className="contenu">{detail[key]}</span> {/* et son contenu */}
+              </div>
             </div>
           </>)
         })}

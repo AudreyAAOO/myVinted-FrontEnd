@@ -2,72 +2,81 @@ import "./signUpSignIn.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie";
-import Header from "../components/Header";
+// import Cookies from "js-cookie";
+// import Header from "../components/Header";
 
-export default function Signup() {
+export default function Signup({ handleToken }) {
     //! STATE
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [newsletter, setNewsletter] = useState(true);
+    const [newsletter, setNewsletter] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
-    const [isConnected, setIsConnected] = useState(false);
-    const [data, setData] = useState();
+    //const [isConnected, setIsConnected] = useState(false);
+    //const [data, setData] = useState();
+
 
     //! COMPORTEMENTS
-    const yourToken = (Math.random(16) * 1000);
-    const Navigate = useNavigate();
 
-    const handleSubmit = (event) => {
-        console.log('submit');
+    // Permet de naviguer
+    const navigate = useNavigate();
+
+    const handleSignup = async (event) => {
         event.preventDefault();
-        if (password.length <= 2) {
-            setErrorMsg("La longueur de votre mot de passe doit être supérieure à 8"); // Je donne comme nouvelle valeur à mon message d'erreur une string
-        } else if (username === "" || email === "") {
-            console.log('vide');
-            setErrorMsg("Veuillez remplir tous les champs");
-        } else {
-            setErrorMsg(""); // Je fais disparaître mon message d'erreur
-            Cookies.set("yourToken", yourToken, { expires: 30 });
-            console.log("yourToken", yourToken);
-            <Header yourToken={yourToken} />
+        setErrorMsg(""); // Je fais disparaitre le message d'erreur
 
-        }
-        fetchData();
-    }
-
-    const fetchData = async () => {
         try {
+            //   Requête axios :
+            // - Premier argument : l'url que j'interroge
+            // - deuxième : le body que j'envoie
+
             const response = await axios.post(
                 `https://lereacteur-vinted-api.herokuapp.com/user/signup`,
+
                 {
-                    username, // "username": username
+                    username, // username: username
                     email,
                     password,
                     newsletter: newsletter,
                 }
             );
 
-            setData(response.data);
-            setIsConnected(true);
+            if (password.length <= 2) {
+                setErrorMsg("La longueur de votre mot de passe doit être supérieure à 2");
+                console.log("token:", response.data.email);
+                console.log("token:", response.data.username);
+            }
 
-            console.log("isConnected ? ", isConnected);
-            console.log("response.data: ", response.data);
-            <Navigate to="/" />
+            if (response.data.token) {  //   Si je reçois bien un token
+                // Cookies.set("yourTokenVinted", response.data.token, { expires: 30 });
+                // Je l'enregistre dans mon state et mes cookies
+                handleToken(response.data.token); // handleToken reçu en props
+                console.log(`Bravo, vous avez soumis votre formulaire. Votre email est ${email}`);
+                console.log("token:", response.data.token);
+                navigate("/"); // Et je redirige vers Home
+            }
+
         } catch (error) {
-            console.log(error.response);
-        }
-    };
+            console.log("error.response.data", error.response.data);
+            console.log("error.response.status", error.response.status);
 
+            if (error.response.data.message === "Missing parameters") {
+                setErrorMsg("Veuillez remplir tous les champs s'il vous plait");
+            }
 
+            //   Si je reçois un message d'erreur "This email already has an account"
+            if (error.response.data.message === "This email already has an account") {
+                setErrorMsg("Cet email est déjà utilisé, veuillez créer un compte avec un mail valide.");
+            }
+        };
+    }
     //! RENDER
     return (<>
 
-        <div className="cadreForm" onSubmit={handleSubmit}>
+        <div className="cadreForm" >
             <p className="titreForm">Inscris-toi avec ton email</p>
             <div className="leFormulaire">
-                <form id="form" >
+                <form id="form" onSubmit={handleSignup}>
                     <input
                         type="text"
                         name="username"
@@ -92,10 +101,12 @@ export default function Signup() {
                             (event) => {
                                 console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
                                 setEmail(event.target.value);  // Je stocke dans mon state le contenu de mon input
+
                             }
                         }
                     />
                     <input
+                        autoComplete="off"
                         type="password"
                         name="password"
                         id="password"
@@ -111,18 +122,22 @@ export default function Signup() {
                     {/* Le contenu de ma balise p dépend du state errorMsg */}
                     <p className={errorMsg && "red"}>{errorMsg}</p>
 
-                    <span><input type="checkbox" name="newsletter" id="" value={newsletter} onClick={
-                        (event) => {
-                            console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
-                            setNewsletter(!newsletter);  // Je stocke dans mon state le contenu de mon input
-                        }
-                    } />
-                        S'inscrire à notre newsletter</span>
-                    <p>En m'inscrivant je confirme avoir lu et accepté les{"\u00A0"}
-                        <a href="https://www.vinted.fr/terms_and_conditions">Termes & Conditions</a>{"\u00A0"}et
-                        Politique de Confidentialité de Vinted. Je confirme avoir au moins 18 ans.</p>
+                    <div>
 
-                    <button className="Button" type="submit">S'inscrire</button>
+                        <input type="checkbox" name="newsletter" value={newsletter} onChange={
+                            (event) => {
+                                console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
+                                setNewsletter(!newsletter);  // Je stocke dans mon state le contenu de mon input
+                            }
+                        } />
+                        <span>S'inscrire à notre newsletter</span>
+                        <p>En m'inscrivant je confirme avoir lu et accepté les{"\u00A0"}
+                            <a href="https://www.vinted.fr/terms_and_conditions">Termes & Conditions</a>{"\u00A0"}et
+                            Politique de Confidentialité de Vinted. Je confirme avoir au moins 18 ans.</p>
+
+                    </div>
+
+                    <button className="button" type="submit">S'inscrire</button>
                 </form>
 
             </div>
@@ -131,4 +146,7 @@ export default function Signup() {
         </div>
 
     </>);
+
+
+
 }

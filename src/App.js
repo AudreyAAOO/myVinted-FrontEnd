@@ -1,9 +1,10 @@
 import './App.css';
-
-
+import { useState } from "react";
+import Cookies from "js-cookie";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-//pages
+
+//Pages
 import Home from './pages/Home';
 import Offer from './pages/Offer';
 import Page404 from './pages/Page404';
@@ -12,22 +13,42 @@ import Login from './pages/Login';
 import Sell from './pages/Sell';
 
 
-//components
+//Components
 import Footer from "./components/Footer";
 import Header from './components/Header';
 
-// import icones
+//! import icônes
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMagnifyingGlass, faHeart, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
+// import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faHeart,faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 library.add(faMagnifyingGlass, faHeart, faCircleQuestion);
 
 // <FontAwesomeIcon icon="fa-regular fa-circle-question" />
-
+// <FontAwesomeIcon icon="fa-regular fa-magnifying-glass" /> 
 function App() {
   //! STATE 
   // State qui me sert à récupérer la data
 
+  // State dans lequel je stocke le token. Sa valeur de base sera :
+  // - Si je trouve un cookie token, ce cookie
+  // - Sinon, null
+  const [token, setToken] = useState(Cookies.get("yourTokenVinted") || null);
+
   //! COMPORTEMENTS 
+
+// Cette fonction permet de stocker le token dans le state et dans les cookies ou supprimer le token dans le state et dans les cookies
+  const handleToken = (token) => {
+    if (token) {
+      setToken(token);
+      Cookies.set("yourTokenVinted", token, { expires: 14 });
+    } else {
+      setToken(null);
+      Cookies.remove("yourTokenVinted");
+    }
+  };
+
 
   //!RENDER
   return (
@@ -35,19 +56,20 @@ function App() {
     // Router doit contenir tout mon site
     <Router>
       {/* Mon Header apparait sur toutes mes pages */}
-      <Header />
+      <Header handleToken={handleToken} token={token} /> {/* Passer des props token à mon header */}
 
       {/* Le composant Routes doit contenir toutes mes 'Route' il affiche un composant à la fois */}
       <Routes>
 
         {/* Pour chaque route, je précise son chemin et le composant qu'elle doit afficher */}
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup handleToken={handleToken} />} /> {/* Passer des props token à Signup */}
+        <Route path="/login" element={<Login handleToken={handleToken} />} /> {/* Passer des props token à Login */}
         <Route path="/sell" element={<Sell />} />
         <Route path="/offer/:id" element={<Offer />} /> {/* chemin dynamique */}
         <Route path="*" element={<Page404 />} />
       </Routes>
+
       {/* Mon Footer apparait sur toutes mes pages */}
       <Footer />
     </Router >

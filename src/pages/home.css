@@ -1,5 +1,4 @@
 .main {
-	height: 70vh;
 	width: 100vw;
 	/* display: grid;
 	grid-template-columns: auto;
@@ -13,16 +12,29 @@
 }
 
 .sectionHero {
-	width: 100vw;
-	display: flex;
-	justify-content: center;
-	/*border: 2px solid red;*/
+	/*border: 3px solid rgb(223, 16, 16);*/
+	background-color: white;
+	height: 475px;
+	width: 100%;
 	margin: 40px 0;
+	position: relative;
 }
 
-.sectionHero img {
-	width: 100vw;
-	border: 1px solid rgb(255, 255, 255);
+.sectionHero > .banniere {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.whiteEffect {
+	position: absolute;
+	/* height: 100%; */
+	width: 100%;
+	/* left: 0px; */
+	right: 0px;
+	bottom: 0px;
+	/* margin-right: 0%;  */
+	z-index: 3;
 }
 
 h1 {

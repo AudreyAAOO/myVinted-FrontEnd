@@ -2,24 +2,58 @@ import "./offerCard.css";
 import userEmptyState from "../assets/img/userEmptyState.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 
 const OfferCard = ({ offerInfos }) => {
-	//console.log({offerInfos})
+	const [errorMsg, setErrorMsg] = useState("");
+
+	const handleResearch = async (event) => {
+		event.preventDefault();
+		setErrorMsg(""); // Je fais disparaitre le message d'erreur
+
+		try {
+			//   Requête axios :
+			// - Premier argument : l'url que j'interroge
+			// - deuxième : le body que j'envoie
+
+			const response = await axios.get(
+				`https://lereacteur-vinted-api.herokuapp.com/offers`,
+
+				{
+					title: String,
+					priceMin: Number,
+					priceMax: Number,
+					sort: "price-desc" || "price-asc",
+					page: Number,
+					limit: Number,
+				}
+			);
+			{
+				console.log("response.status", response.data);
+			}
+		} catch (error) {
+			console.log("error.response.data", error.response.data);
+			console.log("error.response.status", error.response.status);
+		}
+	};
 
 	return (
 		<>
 			<Link to={`/offer/${offerInfos._id}`} style={{ textDecoration: "none" }}>
 				<section className="offerCard">
 					<div className="avatarCard">
-						
 						{/* Si le vendeur a un avatar, je l'affiche */}
 						{offerInfos.owner.account.avatar ? (
-							<img src={offerInfos.owner.account.avatar.secure_url} alt="owner" />
-						// {/* Sinon je mets un avatar par défault */}
-						) : ( 
-							<img src={userEmptyState} alt="owner"/>
+							<img
+								src={offerInfos.owner.account.avatar.secure_url}
+								alt="owner"
+							/>
+						) : (
+							// {/* Sinon je mets un avatar par défault */}
+							<img src={userEmptyState} alt="owner" />
 						)}
-						
+
 						<span>{offerInfos.owner.account.username}</span>
 					</div>
 					<div className="card">
@@ -28,8 +62,9 @@ const OfferCard = ({ offerInfos }) => {
 					<div className="legend-article">
 						<span className="price">
 							<p>{offerInfos.product_price} €</p>
-							<FontAwesomeIcon icon="heart" />
+							<FontAwesomeIcon icon={["far", "heart"]} />
 						</span>
+
 						<div className="description">
 							{/* Je parcours product_detail */}
 							{offerInfos.product_details.map((detail, index) => {

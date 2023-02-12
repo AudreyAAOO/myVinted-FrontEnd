@@ -1,22 +1,24 @@
 header {
+	/*background-color: #e61717;*/
 	border-bottom: 1px solid lightgrey;
 	height: 70px;
-	width: 100vw;
+	width: 100%;
 	display: flex;
 	align-items: center;
+	justify-content: space-evenly;
 }
 
 a > img {
-margin-left: 30px; 
-/*border: 2px solid #e61717;*/
+	margin-left: 30px;
+	/*border: 2px solid #e61717;*/
 }
 
 .containerResearch {
-	/* background-color: #e61717; */
+	/*background-color: #eaf50f;*/
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 60%;
+	width: 50vw;
 }
 
 .inputSearch,
@@ -26,6 +28,11 @@ margin-left: 30px;
 	outline: none;
 	width: 120px;
 	height: 40px;
+}
+
+.headerSelect {
+	cursor: pointer;
+	width: 80px;
 }
 
 .iconSearch {
@@ -39,38 +46,42 @@ margin-left: 30px;
 }
 
 .inputSearch {
-	width: 300px;
+	width: 320px;
 }
 
 .containerButttons {
-	/*background-color: #e61717; */
-	width: 60%;
+	/*background-color: #6cffc9;*/
+	width: 50vw;
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-evenly;
+	padding: 0 10px;
 }
 
 .headerButton {
-	width: 125px;
+	/* width: 205px; */
+	width: 120px;
 	height: 35px;
 	border: 1px solid #09adb6;
 	background-color: #ffffff;
 	color: #09adb6;
 	border-radius: 5px;
-	font-size: 18px;
+	font-size: 16px;
+	cursor: pointer;
 }
 
 .headerButtonSell {
-	width: 155px;
+	width: 140px;
 	height: 35px;
 	border: 1px solid #09adb6;
 	background-color: #09adb6;
 	color: #ffffff;
 	border-radius: 5px;
-	font-size: 18px;
+	font-size: 16px;
+	cursor: pointer;
 }
 
-.Button {
+.button {
 	height: 35px;
 	width: 320px;
 	border: 1px solid #09adb6;
