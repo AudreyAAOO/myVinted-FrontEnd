@@ -23,8 +23,8 @@ export default function Home() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    'https://site--myvinted--hw4gvwsxlwd5.code.run/offers'
-                    //"https://lereacteur-vinted-api.herokuapp.com/offers"
+                    // 'https://site--myvinted--hw4gvwsxlwd5.code.run/offers'
+                    "https://lereacteur-vinted-api.herokuapp.com/offers"
                 );
                 //console.log(response.data);
                 // Je stocke le résultat dans data
