@@ -2,41 +2,40 @@ import "./offerCard.css";
 import userEmptyState from "../assets/img/userEmptyState.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useState } from "react";
+// import axios from "axios";
+// import { useState } from "react";
 
 const OfferCard = ({ offerInfos }) => {
-	const [errorMsg, setErrorMsg] = useState("");
+	// const [errorMsg, setErrorMsg] = useState("");
 
-	const handleResearch = async (event) => {
-		event.preventDefault();
-		setErrorMsg(""); // Je fais disparaitre le message d'erreur
+	// const handleResearch = async (event) => {
+	// 	event.preventDefault();
+	// 	setErrorMsg(""); // Je fais disparaitre le message d'erreur
 
-		try {
-			//   Requête axios :
-			// - Premier argument : l'url que j'interroge
-			// - deuxième : le body que j'envoie
+		// try {
+		// 	//   Requête axios :
+		// 	// - Premier argument : l'url que j'interroge
+		// 	// - deuxième : le body que j'envoie
 
-			const response = await axios.get(
-				`https://lereacteur-vinted-api.herokuapp.com/offers`,
+		// 	const response = axios.get(
+		// 		`https://lereacteur-vinted-api.herokuapp.com/offers`,
 
-				{
-					title: String,
-					priceMin: Number,
-					priceMax: Number,
-					sort: "price-desc" || "price-asc",
-					page: Number,
-					limit: Number,
-				}
-			);
-			{
-				console.log("response.status", response.data);
-			}
-		} catch (error) {
-			console.log("error.response.data", error.response.data);
-			console.log("error.response.status", error.response.status);
-		}
-	};
+		// 		{
+		// 			title: String,
+		// 			priceMin: Number,
+		// 			priceMax: Number,
+		// 			sort: "price-desc" || "price-asc",
+		// 			page: Number,
+		// 			limit: Number,
+		// 		}
+		// 	);
+
+		// 	console.log("response.status", response.data);
+		// } catch (error) {
+		// 	console.log("error.response.data", error.response.data);
+		// 	console.log("error.response.status", error.response.status);
+		// }
+
 
 	return (
 		<>
