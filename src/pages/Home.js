@@ -18,12 +18,13 @@ export default function Home() {
     // La callback de mon useEffect va être appelée une seule fois au premier rendu de mon composant
     useEffect(() => {
         console.log("---- useEffect executed ---- (*＾▽＾)／ ");
+
         // Je déclare la fonction qui fait la requête
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    //'http://site--myvinted--hw4gvwsxlwd5.code.run/user/'
-                    "https://lereacteur-vinted-api.herokuapp.com/offers"
+                    'https://site--myvinted--hw4gvwsxlwd5.code.run/offers'
+                    //"https://lereacteur-vinted-api.herokuapp.com/offers"
                 );
                 //console.log(response.data);
                 // Je stocke le résultat dans data
