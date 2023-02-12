@@ -17,13 +17,16 @@ export default function Sell() {
             name="email"
             id="email"
             // placeholder="Email"
-            value="njl"
+            value=""
 
         />
-<label for="file">Ajoute une photo</label>
-   <input type="file" id="file" name="fiffle"  accept="image/*,.jpg, .png, .jpeg"></input>
+        <label htmlFor="file">
 
-  
+            <span>+ Ajoute une photo</span>
+        </label>
+        <input type="file" id="file" name="fiffle" accept="image/*,.jpg, .png, .jpeg"></input>
+
+
 
 
 
