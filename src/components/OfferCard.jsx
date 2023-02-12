@@ -52,7 +52,7 @@ const OfferCard = ({ offerInfos }) => {
 							<img src={userEmptyState} alt="owner" />
 						)}
 
-						<span>{offerInfos && offerInfos.owner.account.username}</span>
+						<span>{offerInfos.owner && offerInfos.owner.account.username}</span>
 					</div>
 
 					<div className="card">
@@ -62,10 +62,10 @@ const OfferCard = ({ offerInfos }) => {
 								alt={offerInfos.title}
 							/>
 						}
-						{console.log("--- product_image:", product_image)}
+						{console.log("--- product_image:", offerInfos.product_image)}
 						{console.log(
 							"+++ product_image.secure_url:",
-							product_image.secure_url
+							offerInfos.product_image.secure_url
 						)}
 					</div>
 
