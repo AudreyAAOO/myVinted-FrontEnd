@@ -21,7 +21,7 @@ import Header from './components/Header';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core';
 // import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faHeart,faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
+import { faHeart, faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 library.add(faMagnifyingGlass, faHeart, faCircleQuestion);
 
@@ -39,7 +39,7 @@ function App() {
 
   //! COMPORTEMENTS 
 
-// Cette fonction permet de stocker le token dans le state et dans les cookies ou supprimer le token dans le state et dans les cookies
+  // Cette fonction permet de stocker le token dans le state et dans les cookies ou supprimer le token dans le state et dans les cookies
   const handleToken = (token) => {
     if (token) {
       setToken(token);
@@ -57,13 +57,13 @@ function App() {
     // Router doit contenir tout mon site
     <Router>
       {/* Mon Header apparait sur toutes mes pages */}
-      <Header handleToken={handleToken} token={token} search={search} setSearch={setSearch}/> {/* Passer des props token à mon header */}
+      <Header handleToken={handleToken} token={token} search={search} setSearch={setSearch} /> {/* Passer des props token à mon header */}
 
       {/* Le composant Routes doit contenir toutes mes 'Route' il affiche un composant à la fois */}
       <Routes>
 
         {/* Pour chaque route, je précise son chemin et le composant qu'elle doit afficher */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home search={search} />} />
         <Route path="/signup" element={<Signup handleToken={handleToken} />} /> {/* Passer des props token à Signup */}
         <Route path="/login" element={<Login handleToken={handleToken} />} /> {/* Passer des props token à Login */}
         <Route path="/sell" element={<Sell />} />
