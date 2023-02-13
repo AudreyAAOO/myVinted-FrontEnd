@@ -51,8 +51,34 @@ const Offer = () => {
 
 
       <div className="left-column">
+
+
+
+
         {<img src={data.product_image.secure_url} alt="product" />}
+        
+
+        {data.product_pictures.map((image, index) => {
+
+          console.log("test image.height : ", image.height);
+          console.log("test image.secure_url : ", image.secure_url);
+          return (
+            <img key={index} src={image.secure_url} alt="product" />)
+
+
+        })}
+
+
+
+
+
       </div>
+
+
+
+
+
+
 
       <div className="right-column">
         <Link to={"/"}>retourner sur la page d'accueil</Link>
@@ -63,8 +89,8 @@ const Offer = () => {
         {data.product_details.map((detail, index) => { // Je parcours product_details
 
           const key = Object.keys(detail)[0]; // Je récupère le nom de la clé de detail
-          console.log("key", key);
-          console.log("detail[key]: ", detail[key]);
+          //console.log("key: ", key)
+          //console.log("detail[key]: ", detail[key])
           return (<>
             <div key={index} className="offerDetails">
 
