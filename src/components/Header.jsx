@@ -7,11 +7,8 @@ import { Link } from "react-router-dom";
 
 const Header = ({ handleToken, token, search, setSearch }) => {
 	//! STATE
-   
-
 
 	// const [isConnected, setIsConnected] = useState(false);
-
 
 	//! COMPORTEMENTS
 	//const token = Cookies.get("yourTokenVinted");
@@ -69,10 +66,9 @@ const Header = ({ handleToken, token, search, setSearch }) => {
 						placeholder="(*＾▽＾)／Rechercher des articles "
 						value={search}
 						onChange={(event) => {
-							console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
-							setResearch(event.target.value);
+							console.log(event.target.value); //! event.target.value correspond au contenu de mon input
+							setSearch(event.target.value);
 						}}
-
 					></input>
 				</div>
 				<div className="containerButttons">
@@ -113,17 +109,16 @@ const Header = ({ handleToken, token, search, setSearch }) => {
 					)}
 
 					<FontAwesomeIcon icon={["far", "circle-question"]} />
-				
 
-				{token ? (
-					<Link to="/sell">
-						<button className="headerButtonSell">vends tes articles</button>
-					</Link>
-				) : (
-					<Link to="/signup">
-						<button className="headerButtonSell">vends tes articles</button>
-					</Link>
-				)}
+					{token ? (
+						<Link to="/sell">
+							<button className="headerButtonSell">vends tes articles</button>
+						</Link>
+					) : (
+						<Link to="/signup">
+							<button className="headerButtonSell">vends tes articles</button>
+						</Link>
+					)}
 				</div>
 			</header>
 		</>
