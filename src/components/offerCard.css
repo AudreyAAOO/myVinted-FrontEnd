@@ -11,6 +11,7 @@ a {
 	align-items: flex-start;
 	font-size: 12px;
 	line-height: 16px;
+	margin-bottom: 40px;
 }
 
 .avatarCard {
@@ -18,6 +19,9 @@ a {
 	flex-direction: row;
 	align-items: center;
 	background-color: rgb(255, 255, 255);
+	margin-bottom: 10px;
+	
+	
 }
 
 .avatarCard > img {
@@ -29,9 +33,10 @@ a {
 }
 
 .card > img {
+	border: 1px solid rgb(248, 248, 248);
 	height: 390px;
 	width: 260px;
-	object-fit: cover;
+	object-fit:cover;
 }
 
 .legend-article {

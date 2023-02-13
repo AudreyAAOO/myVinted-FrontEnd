@@ -27,9 +27,10 @@ const Offer = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+          `https://site--myvinted--hw4gvwsxlwd5.code.run/offer/${id}`,
+          //`https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
         );
-        //console.log(response.data);
+        console.log("response.data: ", response.data);
         // Je stocke le résultat dans data
         setData(response.data);
         // Je fais paser isLoading à false
@@ -57,11 +58,13 @@ const Offer = () => {
         <Link to={"/"}>retourner sur la page d'accueil</Link>
 
         <p className="offerPrice">{data.product_price} €</p>
+
+
         {data.product_details.map((detail, index) => { // Je parcours product_details
 
           const key = Object.keys(detail)[0]; // Je récupère le nom de la clé de detail
-          //console.log(key);
-          //console.log(detail[key]);
+          console.log("key", key);
+          console.log("detail[key]: ", detail[key]);
           return (<>
             <div key={index} className="offerDetails">
 

@@ -62,12 +62,12 @@ const OfferCard = ({ offerInfos }) => {
 								alt={offerInfos.title}
 							/>
 						)}
-
-						{console.log("--- product_image:", offerInfos.product_image)}
+						{/* {console.log("--- product_image:", offerInfos.product_image)}
+						
 						{console.log(
 							"+++ product_image.secure_url:",
 							offerInfos.product_image.secure_url
-						)}
+						)} */}
 					</div>
 
 					<div className="legend-article">
