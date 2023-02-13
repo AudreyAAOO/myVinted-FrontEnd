@@ -11,36 +11,6 @@ const Header = ({ handleToken, token, search, setSearch }) => {
 	// const [isConnected, setIsConnected] = useState(false);
 
 	//! COMPORTEMENTS
-	//const token = Cookies.get("yourTokenVinted");
-
-	// const handleClickSignup = () => {
-	// 	console.log("click");
-	// 	navigate("/signup");
-	// };
-
-	// const handleDisconnect = () => {
-	// 	console.log("click");
-	// 	Cookies.remove("yourTokenVinted");
-	// 	navigate("/signup");
-	// };
-
-	// const handleClickLogin = () => {
-	// 	console.log("click click");
-	// 	navigate("/login");
-	// };
-
-	// const getCookie = () => {
-	// 	if (Cookies.get(yourToken) !== null) {
-	// 		// elle s'affiche où ?
-	// 		console.log("isConnected :", isConnected);
-	// 		console.log("getCookie :", yourToken);
-	// 		setIsConnected(isConnected === true);
-	// 		console.log("isConnected :", isConnected);
-	// 	}
-	// };
-	// const handleSearch = (e) => {
-	// 	console.log("recherche: ", e);
-	// };
 
 	//! RENDER
 	return (

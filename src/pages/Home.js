@@ -2,11 +2,14 @@ import "./home.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+// images
 import hero from "../assets/img/hero.svg";
 import herobanner from "../assets/img/hero-img-fond.jpg";
 
 //import des components
 import OfferCard from "../components/OfferCard";
+
+
 
 export default function Home({ search }) {
     //! STATE 
@@ -36,11 +39,13 @@ export default function Home({ search }) {
                 console.log(error.message);
             }
         };
+        fetchData();
+    }, [search]);// pour déclencher un useEffect lors d'une recherche
 
-        fetchData([search]);
 
 
-    }, []); //todo ne pas oublier le tableau vide
+
+
 
     //! RENDER
     return isLoading ? (
@@ -57,8 +62,8 @@ export default function Home({ search }) {
         <h1>Articles populaires</h1>
         <main className="main">
             {data.offers && data.offers.map((offer) => {
-                console.log("offer_id", offer._id);
-                console.log("offer_product_name", offer.product_name);
+                //console.log("offer_id", offer._id);
+                //console.log("offer_product_name", offer.product_name);
                 return (<OfferCard offerInfos={offer} key={offer._id} />
                 );
             })}

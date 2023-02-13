@@ -1,7 +1,9 @@
 // import "./sell.css";
 // import { useState } from "react";
 
-export default function Sell() {
+// ne pas oublier import axios from "axios";
+
+export default function Sell(picture, setPicture) {
     //! STATE
 
     //! COMPORTEMENTS
@@ -20,11 +22,19 @@ export default function Sell() {
             value=""
 
         />
-        <label htmlFor="file">
+        <label htmlFor="addPhoto">
 
             <span>+ Ajoute une photo</span>
         </label>
-        <input type="file" id="file" name="fiffle" accept="image/*,.jpg, .png, .jpeg"></input>
+        <input type="addPhoto" id="addPhoto" name="addPhoto" accept="image/*,.jpg, .png, .jpeg">
+
+            onChange={(event) => {
+                console.log(event.target.files[0]);
+                setPicture(event.target.files[0]);
+
+            }}
+
+        </input>
 
 
 

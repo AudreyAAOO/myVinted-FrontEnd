@@ -36,6 +36,8 @@ function App() {
   // - Sinon, null
   const [token, setToken] = useState(Cookies.get("yourTokenVinted") || null);
   const [search, setSearch] = useState("");
+  //! à faire const [picture, setPicture] = useState();
+
 
   //! COMPORTEMENTS 
 
@@ -57,7 +59,8 @@ function App() {
     // Router doit contenir tout mon site
     <Router>
       {/* Mon Header apparait sur toutes mes pages */}
-      <Header handleToken={handleToken} token={token} search={search} setSearch={setSearch} /> {/* Passer des props token à mon header */}
+      <Header  /* Passer des props token à mon header */
+        handleToken={handleToken} token={token} search={search} setSearch={setSearch} />
 
       {/* Le composant Routes doit contenir toutes mes 'Route' il affiche un composant à la fois */}
       <Routes>
@@ -66,7 +69,7 @@ function App() {
         <Route path="/" element={<Home search={search} />} />
         <Route path="/signup" element={<Signup handleToken={handleToken} />} /> {/* Passer des props token à Signup */}
         <Route path="/login" element={<Login handleToken={handleToken} />} /> {/* Passer des props token à Login */}
-        <Route path="/sell" element={<Sell />} />
+        <Route path="/sell" element={<Sell />} /> {/* à faire picture={picture} setPicture={setPicture} */}
         <Route path="/offer/:id" element={<Offer />} /> {/* chemin dynamique */}
         <Route path="*" element={<Page404 />} />
       </Routes>
