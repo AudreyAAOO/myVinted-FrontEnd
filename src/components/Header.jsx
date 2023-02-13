@@ -61,7 +61,7 @@ const Header = ({ handleToken, token, search, setSearch }) => {
 							<Link to="/signup">
 								<button
 									className="headerButton"
-									onClick={console.log("clic submit")}
+									//onClick={console.log("clic submit")}
 								>
 									S'inscrire
 								</button>
@@ -70,7 +70,7 @@ const Header = ({ handleToken, token, search, setSearch }) => {
 							<Link to="/login">
 								<button
 									className="headerButton"
-									onClick={console.log("clic submit")}
+									//onClick={console.log("clic submit")}
 								>
 									Se connecter
 								</button>
