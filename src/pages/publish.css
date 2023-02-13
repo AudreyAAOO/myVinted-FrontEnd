@@ -1,0 +1,65 @@
+.cadreFormPublish {
+	background-color: #ebedee;
+}
+
+.formulaire-publish {
+	width: 100vw;
+	margin: 0 auto;
+}
+
+.formulaire-publish > .h2 {
+	font-size: 24px;
+	font-family: "Maison Neue";
+	padding-top: 40px;
+}
+
+.section-img-publish {
+	background-color: white;
+	width: 90%;
+	padding: 24px;
+	margin: 20px 0;
+	box-shadow: 0 0 2px gray;
+}
+
+.section-form-publish {
+	width: 90%;
+	background-color: white;
+	margin: 20px 0;
+	box-shadow: 0 0 2px gray;
+}
+.ligne-form {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.ligne-form > input {
+	width: 60%;
+	height: 40px;
+}
+
+.ligne-form-addFiles {
+	height: 60px;
+	display: flex;
+	justify-content: center;
+    align-items: center;
+}
+
+.checkbox-input > input {
+	display: none;
+}
+.checkbox-no-checked {
+	border-radius: 3px;
+	padding: 2px 11px 2px 11px;
+	margin: 0 15px 0 0;
+	border: 1px solid black;
+}
+.checkbox-checked {
+	border-radius: 3px;
+	padding: 3px 6px 3px 6px;
+	margin: 0 15px 0 0;
+	background-color: #0ab1ba;
+}
+.checkbox-input > input {
+	display: none;
+}

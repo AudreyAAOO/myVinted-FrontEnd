@@ -80,8 +80,9 @@ export default function Login(handleToken) {
                 </form>
 
             </div>
+            <div className="ligne-form">
             <Link to={"/signup"}>Pas encore de compte ? Inscris-toi !</Link>
-            <Link to={"/"}>retourner sur la page d'accueil</Link>
+            <Link to={"/"}>retourner sur la page d'accueil</Link></div>
         </div>
 
     </>);

@@ -38,7 +38,7 @@ margin-top: 50px;
 	margin-bottom: 20px;
 }
 
- .Button, .offerButton {
+ .button, .offerButton {
     height: 35px;
     width: 320px;
     border: 1px solid #09ADB6;
@@ -48,7 +48,6 @@ margin-top: 50px;
     font-size: 20px;
 	font-weight: 500;
 	cursor: pointer;
-
 }
 
 .red {

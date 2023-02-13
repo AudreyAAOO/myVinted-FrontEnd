@@ -7,3 +7,22 @@
 	--font-familyMedium: "Trip Sans Medium", sans-serif;
     
 }
+
+.container_page404 {
+	height: 50vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	row-gap: 50px;
+	margin: 100px auto;
+	font-size: 30px;
+}
+.container_page404 > img{ 
+width: 200px;
+
+}
+.link-home {
+	display: flex;
+	justify-content: center;
+}

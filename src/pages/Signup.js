@@ -142,8 +142,9 @@ export default function Signup({ handleToken }) {
                 </form>
 
             </div>
+            <div className="ligne-form">
             <Link to={"/login"}> Tu as déjà un compte ? Connecte-toi !</Link>
-            <Link to={"/"}>retourner sur la page d'accueil</Link>
+            <Link to={"/"}>retourner sur la page d'accueil</Link></div>
         </div>
 
     </>);

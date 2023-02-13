@@ -81,7 +81,7 @@ const Header = ({ handleToken, token, search, setSearch }) => {
 					<FontAwesomeIcon icon={["far", "circle-question"]} />
 
 					{token ? (
-						<Link to="/sell">
+						<Link to="/publish">
 							<button className="headerButtonSell">vends tes articles</button>
 						</Link>
 					) : (

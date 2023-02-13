@@ -50,35 +50,25 @@ const Offer = () => {
     <section className="offer">
 
 
-      <div className="left-column">
 
-{/* 
+
+      {/* on veut afficher plusieurs images alors on n'a plus besoin de data.product_image
         {data.product_image.secure_url &&
           <img src={data.product_image.secure_url} alt="product" />
         } */}
 
 
-        {data.product_pictures.map((image, index) => {
-          //console.log("test image.height : ", image.height);
-          //console.log("test image.secure_url : ", image.secure_url);
-          if (data.product_pictures.length === 1) {
-            console.log("1");
-            return <img src={data.product_image.secure_url} alt="product" />
-
-
-          } else {
-            console.log("2");
-            return <img key={index} src={image.secure_url} alt="product" />
-          }
-
-
-        })}
+      {data.product_pictures.map((image, index) => {
+        //console.log("test image.height : ", image.height);
+        //console.log("test image.secure_url : ", image.secure_url);
+        return <div className="left-column">
+          <img key={index} src={image.secure_url} alt="product" />
+        </div>
+      })}
 
 
 
 
-
-      </div>
 
 
 

@@ -3,15 +3,13 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
 //Pages
 import Home from './pages/Home';
 import Offer from './pages/Offer';
 import Page404 from './pages/Page404';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Sell from './pages/Sell';
-
+import Publish from './pages/Publish';
 
 //Components
 import Footer from "./components/Footer";
@@ -22,7 +20,7 @@ import Header from './components/Header';
 import { library } from '@fortawesome/fontawesome-svg-core';
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faHeart, faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faCheck } from '@fortawesome/free-solid-svg-icons';
 library.add(faMagnifyingGlass, faHeart, faCircleQuestion);
 
 // <FontAwesomeIcon icon="fa-regular fa-circle-question" />
@@ -36,7 +34,7 @@ function App() {
   // - Sinon, null
   const [token, setToken] = useState(Cookies.get("yourTokenVinted") || null);
   const [search, setSearch] = useState("");
-  const [picture, setPicture] = useState();
+  const [picture, setPicture] = useState();    // State qui va contenir l'image sélectionnée
 
 
   //! COMPORTEMENTS 
@@ -69,7 +67,7 @@ function App() {
         <Route path="/" element={<Home search={search} />} />
         <Route path="/signup" element={<Signup handleToken={handleToken} />} /> {/* Passer des props token à Signup */}
         <Route path="/login" element={<Login handleToken={handleToken} />} /> {/* Passer des props token à Login */}
-        <Route path="/sell" element={<Sell picture={picture} setPicture={setPicture}/>} />
+        <Route path="/publish" element={<Publish token={token} picture={picture} setPicture={setPicture} />} />
         <Route path="/offer/:id" element={<Offer />} /> {/* chemin dynamique */}
         <Route path="*" element={<Page404 />} />
       </Routes>
