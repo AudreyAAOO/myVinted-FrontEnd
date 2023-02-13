@@ -2,7 +2,7 @@ import "./publish.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as React from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import Button from '@mui/material/Button';
 // import TextField from '@mui/material/TextField';
 import axios from "axios";
@@ -25,6 +25,8 @@ export default function Sell({ token, picture, setPicture }) {
     //! COMPORTEMENTS
 
     console.log("token : ", token);
+    console.log("color : ", color);
+    console.log("picture : ", picture);
 
     const handlePublish = async (event) => {
         event.preventDefault();
@@ -49,7 +51,7 @@ export default function Sell({ token, picture, setPicture }) {
                 formData,
                 {
                     headers: {
-                        authorization: "Bearer", token,
+                        authorization: `Bearer" ${token}`,
                         "Content-Type": "multipart/form-data",
                     },
                 }

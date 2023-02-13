@@ -20,7 +20,7 @@ import Header from './components/Header';
 import { library } from '@fortawesome/fontawesome-svg-core';
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faHeart, faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
-import { faMagnifyingGlass, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 library.add(faMagnifyingGlass, faHeart, faCircleQuestion);
 
 // <FontAwesomeIcon icon="fa-regular fa-circle-question" />
