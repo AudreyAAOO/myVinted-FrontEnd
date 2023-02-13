@@ -45,7 +45,7 @@ export default function Sell({ token, picture, setPicture }) {
             formData.append("exchange", setExchange);
 
             const response = await axios.post(
-                "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
+                "https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish",
                 formData,
                 {
                     headers: {
