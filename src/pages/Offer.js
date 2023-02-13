@@ -52,22 +52,23 @@ const Offer = () => {
 
       <div className="left-column">
 
-
+{/* 
         {data.product_image.secure_url &&
           <img src={data.product_image.secure_url} alt="product" />
-        }
+        } */}
 
 
         {data.product_pictures.map((image, index) => {
           //console.log("test image.height : ", image.height);
           //console.log("test image.secure_url : ", image.secure_url);
-          if (data.product_pictures.length >= 1) {
-            console.log("y");
-            return <img key={index} src={image.secure_url} alt="product" />
-            
-          } else {
-            console.log("y");
+          if (data.product_pictures.length === 1) {
+            console.log("1");
             return <img src={data.product_image.secure_url} alt="product" />
+
+
+          } else {
+            console.log("2");
+            return <img key={index} src={image.secure_url} alt="product" />
           }
 
 
