@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 // import { useState } from "react";
 // import Cookies from "js-cookie";
 
-const Header = ({ handleToken, token }) => {
+const Header = ({ handleToken, token, search, setSearch }) => {
 	//! STATE
-    // const [research, setResearch] = useState("");
+   
 
 
 	// const [isConnected, setIsConnected] = useState(false);
@@ -67,10 +67,11 @@ const Header = ({ handleToken, token }) => {
 						className="inputSearch"
 						type="search"
 						placeholder="(*＾▽＾)／Rechercher des articles "
-						// onChange={(event) => {
-						// 	console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
-						// 	setResearch(event.target.value);
-						// }}
+						value={search}
+						onChange={(event) => {
+							console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
+							setResearch(event.target.value);
+						}}
 
 					></input>
 				</div>

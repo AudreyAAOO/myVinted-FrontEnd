@@ -35,6 +35,7 @@ function App() {
   // - Si je trouve un cookie token, ce cookie
   // - Sinon, null
   const [token, setToken] = useState(Cookies.get("yourTokenVinted") || null);
+  const [search, setSearch] = useState("");
 
   //! COMPORTEMENTS 
 
@@ -56,7 +57,7 @@ function App() {
     // Router doit contenir tout mon site
     <Router>
       {/* Mon Header apparait sur toutes mes pages */}
-      <Header handleToken={handleToken} token={token} /> {/* Passer des props token à mon header */}
+      <Header handleToken={handleToken} token={token} search={search} setSearch={setSearch}/> {/* Passer des props token à mon header */}
 
       {/* Le composant Routes doit contenir toutes mes 'Route' il affiche un composant à la fois */}
       <Routes>
