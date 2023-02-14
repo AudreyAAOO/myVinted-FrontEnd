@@ -1,24 +1,48 @@
-.containerPayment {  border: 2px solid #09ADB6;
+.containerPayment {
+	border: 2px solid #09adb6;
+	display: flex;
+	align-items: flex-start;
+	width: 50vw;
+	margin: 0 auto;
+	row-gap: 10px;
+}
+.containerPayment > form {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-    width: 50vw;
+	align-items: flex-start;
+}
+.section {
+	border-bottom: 2px solid #61ff1e;
+	margin: 30px 0;
+	display: inline-flex;
 }
 
-.section {  border: 2px solid #61ff1e;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+/* background-color: #4dc706; */
+
+.section:nth-child(even) {
+	border-bottom: 2px solid #ec6803;
+	font-weight: 700;
+}
+
+h5 {
+	font-weight: 700;
+}
+
+.sectionBank {
+	border-bottom: 2px solid #61ff1e;
+	margin: 30px 0;
+	width: 100%;
 }
 
 .buttonPayment {
-    height: 35px;
-    width: 320px;
-    border: 1px solid #09ADB6;
-    border-radius: 5px;
-    background-color: #09ADB6;
-    color: white;
-    font-size: 20px;
+	height: 35px;
+	width: 320px;
+	border: 1px solid #09adb6;
+	border-radius: 5px;
+	background-color: #09adb6;
+	color: white;
+	font-size: 20px;
 	font-weight: 500;
 	cursor: pointer;
 }

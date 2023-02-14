@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
 
-const CheckoutForm = ({ price, title, description }) => {
-	// id
+const CheckoutForm = ({ price, title, description, idAcheteur }) => {
+	// idAcheteur
 	//! STATE
 	const [isLoading, setIsLoading] = useState(false);
 	const [completed, setCompleted] = useState(false); // state pour le paiement fait/non fait
@@ -29,20 +29,22 @@ const CheckoutForm = ({ price, title, description }) => {
 			// Demande de création d'un token via l'API Stripe
 			// On envoie les données bancaires à STRIPE dans la requête pour qu'il valide le code de carte de l'utilisateur et qu'il me renvoie un token.
 			const stripeResponse = await stripe.createToken(cardElement, {
-				name: "name",
+				name: idAcheteur,
 			});
 
-			const stripeToken = stripeResponse.token.id;
+			const stripeToken = stripeResponse.token.idAcheteur;
+
 			console.log("stripeResponse", stripeResponse);
 
 			// Une fois le token reçu depuis l'API Stripe
 			//   Je fais une requête à mon back en envoyant le stripetoken
 			const response = await axios.post(
-				`https://site--myvinted--hw4gvwsxlwd5.code.run/payment`,
+				//`https://site--myvinted--hw4gvwsxlwd5.code.run/payment`,
+				`https://lereacteur-vinted-api.herokuapp.com/payment`,
 				{
 					amount: { price },
 					currency: "eur",
-					//title: { title },
+					title: { title },
 					description: { description },
 					token: stripeToken, // On envoie ici le token
 				}
@@ -68,10 +70,12 @@ const CheckoutForm = ({ price, title, description }) => {
 			{!completed ? (
 				<div className="containerPayment">
 					<form onSubmit={handlePayment}>
-						<h4>Résumé de la commande</h4>
-
+						<div>
+							<h5>Résumé de la commande</h5>
+							<p>Commande :</p>
+						</div>
 						<div className="section">
-							<span>Commande :</span> <span>{title} </span>
+							<span>{title} </span>
 							<span>{price} €</span>
 						</div>
 						<div className="section">
@@ -92,12 +96,12 @@ const CheckoutForm = ({ price, title, description }) => {
 							Il ne vous reste plus qu'un étape pour vous offrir {title}. Vous
 							allez payer {total} (frais de protection et frais de port inclus).
 						</p>
-						<div className="section">
+						<div className="sectionBank">
 							<h5>Informations bancaires</h5>
 							<CardElement />
 						</div>
 
-						<div className="section">
+						<div className="sectionButtonPayment">
 							{completed ? (
 								<p>Paiement effectué, merci pour votre achat.</p>
 							) : (

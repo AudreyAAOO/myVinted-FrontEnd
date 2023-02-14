@@ -21,15 +21,14 @@ const Offer = ({ token }) => {
   //console.log(params);
 
 
-
   useEffect(() => {
     console.log("---- useEffect executed ---- (*＾▽＾)／ ");
     // Je déclare la fonction qui fait la requête
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://site--myvinted--hw4gvwsxlwd5.code.run/offer/${id}`,
-          //`https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+          //`https://site--myvinted--hw4gvwsxlwd5.code.run/offer/${id}`,
+          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`,
           // urlPerso + `/offer/${id}`,
           // urlReacteur + `/offer/${id}`,
 
@@ -112,7 +111,7 @@ const Offer = ({ token }) => {
             price: data.product_price,
             title: data.product_name,
             description: data.product_description,
-            // id: data.owner._id
+            idAcheteur: data.owner._id
           }}>
             <button className="offerButton" >Acheter</button>
           </Link>
