@@ -1,8 +1,9 @@
-
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import CheckoutForm from "./components/CheckoutForm";
+import axios from "axios";
+
 
 // Je me connecte à mon compte stripe en front en fournissant ma clef publique
 const stripePromise = loadStripe(
