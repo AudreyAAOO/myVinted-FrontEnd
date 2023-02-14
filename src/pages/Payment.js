@@ -1,3 +1,5 @@
+
+import { useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { useState } from "react";
@@ -8,18 +10,25 @@ import axios from "axios";
 
 // Je me connecte à mon compte stripe en front en fournissant ma clef publique
 const stripePromise = loadStripe(
-    "pk_test_51IpvphDqQKb3lCIT3UU1fIPnAXyyG57gLns831kNwLVGCFo1a3MtSucuiIwEijgip8fL85zUlKZKTK0a2JAhSWHt00ZWSjTErF"
+    "pk_test_51MbRPeA7BASDl2o24eqljvPtATOQzjj9YKrbsa2jHk8OvACetkOx8UvWYuieg0daXIetI5q4R0pL6MQrgp31r54o00z3qiKMNg"
 );
 
 // urlPerso + `/offer/${id}`,
 // urlReacteur + `/offer/${id}`,
 
+//! 
 
 const Payment = () => {
+
+    const location = useLocation();
+    const { title } = location.state;
+
+
+
     return (<>
         <p> $$$$$$$$$$$$$$ </p>
 
-
+        <span>{title}</span>
 
         <Elements stripe={stripePromise}>
             <CheckoutForm />

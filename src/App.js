@@ -76,7 +76,7 @@ function App() {
         <Route path="/login" element={<Login handleToken={handleToken} />} /> {/* Passer des props token à Login */}
         <Route path="/publish" element={<Publish token={token} />} />
         <Route path="/offer/:id" element={<Offer token={token} />} /> {/* chemin dynamique */}
-        <Route path="/payment" element={<Payment token={token} />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
 
