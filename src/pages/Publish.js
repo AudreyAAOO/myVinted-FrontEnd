@@ -1,14 +1,15 @@
 import "./publish.css";
 import { useState } from "react";
-import { Link , Navigate} from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import * as React from 'react';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import Button from '@mui/material/Button';
 // import TextField from '@mui/material/TextField';
 import axios from "axios";
 
-export default function Sell({ token, picture, setPicture }) {
+export default function Publish({ token }) {
     //! STATE
+    const [picture, setPicture] = useState();    // State qui va contenir l'image sélectionnée
     const [titre, setTitre] = useState("");
     const [description, setDescription] = useState("");
     const [brand, setBrand] = useState("");
@@ -19,7 +20,6 @@ export default function Sell({ token, picture, setPicture }) {
     const [price, setPrice] = useState("");
     const [exchange, setExchange] = useState(false);
     const [imageToDisplay, setImageToDisplay] = useState();  // State qui va contenir la réponse du serveur
-
 
 
     //! COMPORTEMENTS
@@ -58,8 +58,9 @@ export default function Sell({ token, picture, setPicture }) {
                     },
                 }
             );
-            console.log("response axios :", response);
+
             setImageToDisplay(response.data);
+            console.log("response axios :", response);
             console.log("imageToDisplay :", imageToDisplay);
 
         } catch (error) {
@@ -85,7 +86,7 @@ export default function Sell({ token, picture, setPicture }) {
                     <div className="section-img-publish">
                         <div className="ligne-form-addFiles">
 
-                            <label htmlFor="addPhoto">
+                            <label htmlFor="addPhoto" className="addPhoto">
                                 <h4>+ Ajoute une photo</h4>
                             </label>
                             <input
@@ -94,8 +95,8 @@ export default function Sell({ token, picture, setPicture }) {
                                     // console.log(event.target.files[0]);
                                     setPicture(event.target.files[0]);
                                 }}
+                            // style={{ display: "none" }}
                             />
-
 
 
                             {/* <div>
@@ -244,16 +245,18 @@ export default function Sell({ token, picture, setPicture }) {
 
                     <button className="button" type="submit">Ajouter</button>
 
+                    {/* afficher l'image  */}
+                    <div className="ligne-form">
 
+                        {picture && <img src={URL.createObjectURL(picture)} alt="preview" />}
+                    </div>
                 </form>
-                {/* afficher l'image  */}
-                <div className="ligne-form">
-                    {imageToDisplay && <img src={imageToDisplay.secure_url} alt="" />}</div>
-            </div>
-            <div className="link-home">
-                <Link to={"/"}>retourner sur la page d'accueil</Link></div>
-        </div>
 
+                <div className="link-home">
+                    <Link to={"/"}>retourner sur la page d'accueil</Link>
+                </div>
+            </div>
+        </div>
     </>);
 
 

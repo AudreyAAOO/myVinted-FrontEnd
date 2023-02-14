@@ -34,7 +34,7 @@ function App() {
   // - Sinon, null
   const [token, setToken] = useState(Cookies.get("yourTokenVinted") || null);
   const [search, setSearch] = useState("");
-  const [picture, setPicture] = useState();    // State qui va contenir l'image sélectionnée
+  
 
 
   //! COMPORTEMENTS 
@@ -67,7 +67,7 @@ function App() {
         <Route path="/" element={<Home search={search} />} />
         <Route path="/signup" element={<Signup handleToken={handleToken} />} /> {/* Passer des props token à Signup */}
         <Route path="/login" element={<Login handleToken={handleToken} />} /> {/* Passer des props token à Login */}
-        <Route path="/publish" element={<Publish token={token} picture={picture} setPicture={setPicture} />} />
+        <Route path="/publish" element={<Publish token={token} />} />
         <Route path="/offer/:id" element={<Offer />} /> {/* chemin dynamique */}
         <Route path="*" element={<Page404 />} />
       </Routes>
