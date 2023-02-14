@@ -1,6 +1,6 @@
 import "./signUpSignIn.css";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 //import Cookies from "js-cookie";
 
@@ -12,7 +12,7 @@ export default function Login(handleToken) {
     //const [errorMsg, setErrorMsg] = useState("");
 
     //! COMPORTEMENTS
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
 
     const handleLogin = async (event) => {
@@ -32,7 +32,7 @@ export default function Login(handleToken) {
             if (response.data.token) {
                 // Cookies.set("yourTokenVinted", response.data.token, { expires: 14 });
                 handleToken(response.data.token);
-                navigate("/");
+                <Navigate to="/" />
             }
 
         } catch (error) {

@@ -23,7 +23,7 @@ const Offer = () => {
 
   useEffect(() => {
     console.log("---- useEffect executed ---- (*＾▽＾)／ ");
-    // Je déclare la focntion qui fait la requête
+    // Je déclare la fonction qui fait la requête
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -53,7 +53,7 @@ const Offer = () => {
 
 
       {/* on veut afficher plusieurs images alors on n'a plus besoin de data.product_image
-        {data.product_image.secure_url &&
+         &&
           <img src={data.product_image.secure_url} alt="product" />
         } */}
 

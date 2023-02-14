@@ -26,7 +26,7 @@ export default function Sell({ token, picture, setPicture }) {
 
     console.log("token : ", token);
     console.log("color : ", color);
-    console.log("picture : ", picture);
+
 
     const handlePublish = async (event) => {
         event.preventDefault();
@@ -51,16 +51,17 @@ export default function Sell({ token, picture, setPicture }) {
                 formData,
                 {
                     headers: {
-                        authorization: `Bearer" ${token}`,
+                        authorization: `Bearer ${token}`,
                         "Content-Type": "multipart/form-data",
                     },
                 }
             );
             console.log("response axios :", response);
             setImageToDisplay(response.data);
+            console.log("imageToDisplay :", imageToDisplay);
         } catch (error) {
-            console.log("error.message", error.message);
-            console.log("error", error);
+
+            console.log(error.message);
         }
     }
 
@@ -90,20 +91,13 @@ export default function Sell({ token, picture, setPicture }) {
                                     setPicture(event.target.files[0]);
                                 }}
                             />
-                            <img src={picture} alt="" />
+
+
+
                             {/* <div>
                 <Button type="file" id="addPhoto" name="addPhoto" accept="image/*,.jpg, .png, .jpeg"
-
                     variant="contained">+ Ajoute une photo</Button>
             </div> */}
-                            {/* <TextField id="outlined-search" label="Search field" type="file" />
-            <TextField
-          id="outlined-helperText"
-
-          label="Helper text"
-          defaultValue="Default Value"
-          helperText="Some important text"
-        /> */}
                         </div>
                     </div>
                     {/***************** TITRE ET DESCRIPTION */}
@@ -138,7 +132,7 @@ export default function Sell({ token, picture, setPicture }) {
                                 rows="5"
                                 cols="90"
                                 wrap="hard"
-                                maxlength="300"
+                                maxLength="300"
                                 onChange={(event) => {
                                     setDescription(event.target.value);
                                 }} >
