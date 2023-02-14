@@ -14,7 +14,7 @@ export default function Signup({ handleToken }) {
     const [newsletter, setNewsletter] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     //const [isConnected, setIsConnected] = useState(false);
-    //const [data, setData] = useState();
+
 
 
     //! COMPORTEMENTS
@@ -26,68 +26,69 @@ export default function Signup({ handleToken }) {
         event.preventDefault();
         setErrorMsg(""); // Je fais disparaitre le message d'erreur
 
-        try {
+        if (password.length <= 8) {
+            setErrorMsg("La longueur de votre mot de passe doit être supérieure à 8");
+            console.log("psw:", password.length);
+        } else {
 
-            const formData = new FormData();// constructeur FormData
+            try {
 
-            formData.append("avatar", avatar);
-            formData.append("username", username);
-            formData.append("email", email);
-            formData.append("password", password);
-            formData.append("newsletter", newsletter);
+                const formData = new FormData();// constructeur FormData
 
-            console.log("formData:", formData);
+                formData.append("avatar", avatar);
+                formData.append("username", username);
+                formData.append("email", email);
+                formData.append("password", password);
+                formData.append("newsletter", newsletter);
+
+                console.log("formData:", formData);
 
 
-            //   Requête axios :
-            // - Premier argument : l'url que j'interroge
-            // - deuxième : le form-data que j'envoie
+                //   Requête axios :
+                // - Premier argument : l'url que j'interroge
+                // - deuxième : le form-data que j'envoie
 
-            const response = await axios.post(
-                `https://site--myvinted--hw4gvwsxlwd5.code.run/user/signup`,
-                // `https://lereacteur-vinted-api.herokuapp.com/user/signup`,
-                formData,
-                // {
-                //     username, // username: username
-                //     email,
-                //     password,
-                //     newsletter: newsletter,
-                // }
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    },
+                const response = await axios.post(
+                    `https://site--myvinted--hw4gvwsxlwd5.code.run/user/signup`,
+                    // `https://lereacteur-vinted-api.herokuapp.com/user/signup`,
+                    formData,
+                    // {
+                    //     username, // username: username
+                    //     email,
+                    //     password,
+                    //     newsletter: newsletter,
+                    // }
+                    {
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        },
+                    }
+                );
+
+
+                if (response.data.token) {  //   Si je reçois bien un token
+                    // Cookies.set("yourTokenVinted", response.data.token, { expires: 30 });
+                    // Je l'enregistre dans mon state et mes cookies
+                    handleToken(response.data.token); // handleToken reçu en props
+                    console.log(`Bravo, vous avez soumis votre formulaire. Votre email est ${email}`);
+                    console.log("token:", response.data.token);
+                    navigate("/"); // Et je redirige vers Home
                 }
-            );
 
-            if (password.length <= 2) {
-                setErrorMsg("La longueur de votre mot de passe doit être supérieure à 2");
-                console.log("token:", response.data.email);
-                console.log("token:", response.data.username);
+            } catch (error) {
+                console.log("error.response.data", error.response.data);
+                console.log("error.response.status", error.response.status);
+
+                if (error.response.data.message === "Missing parameters") {
+                    setErrorMsg("Veuillez remplir tous les champs s'il vous plait");
+                }
+
+                //   Si je reçois un message d'erreur "This email already has an account"
+                if (error.response.data.message === "This email already has an account") {
+                    setErrorMsg("Cet email est déjà utilisé, veuillez créer un compte avec un mail valide.");
+                }
             }
-
-            if (response.data.token) {  //   Si je reçois bien un token
-                // Cookies.set("yourTokenVinted", response.data.token, { expires: 30 });
-                // Je l'enregistre dans mon state et mes cookies
-                handleToken(response.data.token); // handleToken reçu en props
-                console.log(`Bravo, vous avez soumis votre formulaire. Votre email est ${email}`);
-                console.log("token:", response.data.token);
-                navigate("/"); // Et je redirige vers Home
-            }
-
-        } catch (error) {
-            console.log("error.response.data", error.response.data);
-            console.log("error.response.status", error.response.status);
-
-            if (error.response.data.message === "Missing parameters") {
-                setErrorMsg("Veuillez remplir tous les champs s'il vous plait");
-            }
-
-            //   Si je reçois un message d'erreur "This email already has an account"
-            if (error.response.data.message === "This email already has an account") {
-                setErrorMsg("Cet email est déjà utilisé, veuillez créer un compte avec un mail valide.");
-            }
-        };
+        }
     }
     //! RENDER
     return (<>

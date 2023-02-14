@@ -10,12 +10,12 @@ import axios from "axios";
 export default function Publish({ token }) {
     //! STATE
     const [picture, setPicture] = useState();    // State qui va contenir l'image sélectionnée
-    const [titre, setTitre] = useState("");
+    const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [brand, setBrand] = useState("");
     const [size, setSize] = useState("");
     const [color, setColor] = useState("");
-    const [rate, setRate] = useState("");
+    const [condition, setCondition] = useState("");
     const [city, setCity] = useState("");
     const [price, setPrice] = useState("");
     const [exchange, setExchange] = useState(false);
@@ -36,12 +36,12 @@ export default function Publish({ token }) {
             const formData = new FormData();// constructeur FormData
 
             formData.append("picture", picture);
-            formData.append("titre", titre);
+            formData.append("title", title);
             formData.append("description", description);
             formData.append("brand)", brand);
             formData.append("size", size);
             formData.append("color", color);
-            formData.append("rate", rate);
+            formData.append("condition", condition);
             formData.append("city", city);
             formData.append("price", price);
             formData.append("exchange", setExchange);
@@ -61,10 +61,9 @@ export default function Publish({ token }) {
 
             setImageToDisplay(response.data);
             console.log("response axios :", response);
-            console.log("imageToDisplay :", imageToDisplay);
 
         } catch (error) {
-            console.log("message: ", error.message);
+            console.log("message: ", error.response);
         }
     }
 
@@ -83,12 +82,13 @@ export default function Publish({ token }) {
                     {/***************** INPUT ADD PHOTO */}
                     <div className="section-img-publish">
                         <div className="ligne-form-addFiles">
-
+                            {/* ajouter attribut pr plusieurs photos */}
                             <label htmlFor="addPhoto" className="addPhoto">
                                 <h4>+ Ajoute une photo</h4>
                             </label>
                             <input
                                 type="file"
+                                multiple="multiple"
                                 onChange={(event) => {
                                     // console.log(event.target.files[0]);
                                     setPicture(event.target.files[0]);
@@ -108,26 +108,18 @@ export default function Publish({ token }) {
                         <div className="ligne-form">
                             <h4>Titre </h4>
                             <input
-                                value={titre}
+                                value={title}
                                 type="text"
-                                name="titre"
+                                name="title"
                                 placeholder="ex: chemise Sézane verte"
                                 onChange={(event) => {
-                                    setTitre(event.target.value);
+                                    setTitle(event.target.value);
                                 }}
                             />
                         </div>
                         <div className="ligne-form">
                             <h4>Décris ton article </h4>
-                            {/* <input
-                        value={description}
-                        type="text"
-                        name="description"
-                        placeholder="ex: porté quelquefois, taille correctement"
-                        onChange={(event) => {
-                            setDescription(event.target.value);
-                        }}
-                    /> */}
+
                             <textarea value={description}
                                 type="textarea"
                                 name="description"
@@ -181,12 +173,12 @@ export default function Publish({ token }) {
                         <div className="ligne-form">
                             <h4>Etat</h4>
                             <input
-                                value={rate}
+                                value={condition}
                                 type="text"
-                                name="rate"
+                                name="condition"
                                 placeholder="Neuf avec étiquette"
                                 onChange={(event) => {
-                                    setRate(event.target.value);
+                                    setCondition(event.target.value);
                                 }}
                             /></div>
                         <div className="ligne-form">
@@ -218,7 +210,7 @@ export default function Publish({ token }) {
                         <div className="ligne-form">
                             <h4>
 
-                                {exchange ? (
+                                {/* {exchange ? (
                                     <label
                                         htmlFor="exchange"
                                         className="checkbox-checked"
@@ -228,7 +220,7 @@ export default function Publish({ token }) {
                                         htmlFor="exchange"
                                         className="checkbox-no-checked"
                                     ></label>
-                                )}
+                                )} */}
                                 <input
                                     value={exchange}
                                     type="checkbox"
@@ -246,6 +238,8 @@ export default function Publish({ token }) {
                     {/* afficher l'image  */}
                     <div className="ligne-form">
 
+                        {picture && <img src={URL.createObjectURL(picture)} alt="preview" />}
+                        
                         {picture && <img src={URL.createObjectURL(picture)} alt="preview" />}
                     </div>
                 </form>

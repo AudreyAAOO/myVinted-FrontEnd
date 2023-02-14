@@ -10,6 +10,7 @@ import Page404 from './pages/Page404';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Publish from './pages/Publish';
+import Payment from './pages/Payment';
 
 //Components
 import Footer from "./components/Footer";
@@ -34,7 +35,7 @@ function App() {
   // - Sinon, null
   const [token, setToken] = useState(Cookies.get("yourTokenVinted") || null);
   const [search, setSearch] = useState("");
-  
+
 
 
   //! COMPORTEMENTS 
@@ -68,7 +69,8 @@ function App() {
         <Route path="/signup" element={<Signup handleToken={handleToken} />} /> {/* Passer des props token à Signup */}
         <Route path="/login" element={<Login handleToken={handleToken} />} /> {/* Passer des props token à Login */}
         <Route path="/publish" element={<Publish token={token} />} />
-        <Route path="/offer/:id" element={<Offer />} /> {/* chemin dynamique */}
+        <Route path="/offer/:id" element={<Offer token={token} />} /> {/* chemin dynamique */}
+        <Route path="/payment" element={<Payment token={token} />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
 

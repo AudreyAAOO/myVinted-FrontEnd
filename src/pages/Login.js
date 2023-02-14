@@ -1,6 +1,6 @@
 import "./signUpSignIn.css";
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 //import Cookies from "js-cookie";
 
@@ -9,35 +9,42 @@ export default function Login(handleToken) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     //const [data, setData] = useState();
-    //const [errorMsg, setErrorMsg] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
 
     //! COMPORTEMENTS
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
     const handleLogin = async (event) => {
         event.preventDefault();
+        setErrorMsg(""); // Je fais disparaitre le message d'erreur
+        if (email === "" || password === "") {
+            console.log("Missing parameters");
+            setErrorMsg("Veuillez entrer votre email et/ou votre mot de passe svp");
 
-        try {
-            const response = await axios.post(
-                `https://site--myvinted--hw4gvwsxlwd5.code.run/user/login`,
-                //`https://lereacteur-vinted-api.herokuapp.com/user/login`,
-                {
-                    email,
-                    password,
+        } else {
+            try {
+                const response = await axios.post(
+                    `https://site--myvinted--hw4gvwsxlwd5.code.run/user/login`,
+                    //`https://lereacteur-vinted-api.herokuapp.com/user/login`,
+                    {
+                        email,
+                        password,
+                    }
+                );
+                console.log("response.data: ", response.data.token);
+
+                if (response.data.token) {
+                    // Cookies.set("yourTokenVinted", response.data.token, { expires: 14 });
+
+                    handleToken(response.data.token);
+                    navigate("/publish");
                 }
-            );
-            console.log("response.data: ", response.data);
 
-            if (response.data.token) {
-                // Cookies.set("yourTokenVinted", response.data.token, { expires: 14 });
-                handleToken(response.data.token);
-                <Navigate to="/" />
+            } catch (error) {
+                console.log("error.response.data", error.response.data);
+                console.log("error.response.status", error.response.status);
             }
-
-        } catch (error) {
-            console.log("error.response.data", error.response.data);
-            console.log("error.response.status", error.response.status);
         }
     };
 
@@ -74,7 +81,7 @@ export default function Login(handleToken) {
                         }
                     />
                     {/* Le contenu de ma balise p dépend du state errorMsg */}
-                    {/* <p className={errorMsg && "red"}>{errorMsg}</p> */}
+                    <p className={errorMsg && "red"}>{errorMsg}</p>
 
                     <button className="button" type="submit">Se connecter</button>
                 </form>

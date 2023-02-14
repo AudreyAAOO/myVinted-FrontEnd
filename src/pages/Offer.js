@@ -2,11 +2,11 @@ import "./offer.css";
 import userEmptyState from "../assets/img/userEmptyState.svg";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 
-const Offer = () => {
+const Offer = ({ token }) => {
 
   //! refaire une requête pour mettre les annonces à jour
   // State qui me sert à récupérer la data
@@ -67,15 +67,6 @@ const Offer = () => {
       })}
 
 
-
-
-
-
-
-
-
-
-
       <div className="right-column">
         <Link to={"/"}>retourner sur la page d'accueil</Link>
 
@@ -112,11 +103,26 @@ const Offer = () => {
 
           <span>{data.owner.account.username}</span>
 
+        </div>
 
-        </div><button className="offerButton">Acheter</button>
+        {!token ? (
+          // <Navigate to="/login" />
+          <Link to={"/login"}>
+            <button className="offerButton">Acheter</button>
+          </Link>
+        ) : (
+          <Link to={"/payment"}>
+            <button className="offerButton">Acheter</button>
+          </Link>
+        )}
+
+
+
+
+
       </div>
 
-    </section>
+    </section >
   )
 
 }
