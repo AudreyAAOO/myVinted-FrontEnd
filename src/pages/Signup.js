@@ -7,6 +7,7 @@ import axios from "axios";
 
 export default function Signup({ handleToken }) {
     //! STATE
+    const [avatar, setAvatar] = useState();    // State qui va contenir l'avatar
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -26,19 +27,36 @@ export default function Signup({ handleToken }) {
         setErrorMsg(""); // Je fais disparaitre le message d'erreur
 
         try {
+
+            const formData = new FormData();// constructeur FormData
+
+            formData.append("avatar", avatar);
+            formData.append("username", username);
+            formData.append("email", email);
+            formData.append("password", password);
+            formData.append("newsletter", newsletter);
+
+            console.log("formData:", formData);
+
+
             //   Requête axios :
             // - Premier argument : l'url que j'interroge
-            // - deuxième : le body que j'envoie
+            // - deuxième : le form-data que j'envoie
 
             const response = await axios.post(
                 `https://site--myvinted--hw4gvwsxlwd5.code.run/user/signup`,
                 // `https://lereacteur-vinted-api.herokuapp.com/user/signup`,
-
+                formData,
+                // {
+                //     username, // username: username
+                //     email,
+                //     password,
+                //     newsletter: newsletter,
+                // }
                 {
-                    username, // username: username
-                    email,
-                    password,
-                    newsletter: newsletter,
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    },
                 }
             );
 
@@ -125,17 +143,17 @@ export default function Signup({ handleToken }) {
 
 
                     {/********************* upload de l'avatar ******************/}
-                    {/* <div>
+                    <div>
+                        <label htmlFor="addPhoto" className="addPhoto"><h4>Ajoute un avatar</h4></label>
                         <input
                             type="file"
                             name="avatar"
-                            value={picture}
                             onChange={(event) => {
-                                // console.log(event.target.files[0]);
-                                setPicture(event.target.files[0]);
+                                console.log(event.target.files[0]);
+                                setAvatar(event.target.files[0]);
                             }}
                         />
-                    </div> */}
+                    </div>
 
 
                     <div>
