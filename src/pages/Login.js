@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 //import Cookies from "js-cookie";
 
-export default function Login(handleToken) {
+export default function Login({ handleToken }) {
     //! STATE
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
