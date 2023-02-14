@@ -59,9 +59,9 @@ export default function Sell({ token, picture, setPicture }) {
             console.log("response axios :", response);
             setImageToDisplay(response.data);
             console.log("imageToDisplay :", imageToDisplay);
-        } catch (error) {
 
-            console.log(error.message);
+        } catch (error) {
+            console.log("message: ", error.message);
         }
     }
 
