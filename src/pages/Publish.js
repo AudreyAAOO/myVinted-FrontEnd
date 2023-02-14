@@ -1,6 +1,6 @@
 import "./publish.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , Navigate} from "react-router-dom";
 import * as React from 'react';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import Button from '@mui/material/Button';
@@ -30,7 +30,7 @@ export default function Sell({ token, picture, setPicture }) {
 
     const handlePublish = async (event) => {
         event.preventDefault();
-
+        console.log("test event:", event);
         try {
 
             const formData = new FormData();// constructeur FormData
@@ -41,10 +41,12 @@ export default function Sell({ token, picture, setPicture }) {
             formData.append("brand)", brand);
             formData.append("size", size);
             formData.append("color", color);
-            formData.append("etat", rate);
-            formData.append("emplacement", city);
+            formData.append("rate", rate);
+            formData.append("city", city);
             formData.append("price", price);
             formData.append("exchange", setExchange);
+
+            console.log("formData:", formData);
 
             const response = await axios.post(
                 "https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish",
@@ -68,7 +70,9 @@ export default function Sell({ token, picture, setPicture }) {
 
 
     //! RENDER
-    return (<>
+    return !token ? (
+        <Navigate to="/login" />
+    ) : (<>
 
         <div className="cadreFormPublish" >
 
@@ -251,4 +255,6 @@ export default function Sell({ token, picture, setPicture }) {
         </div>
 
     </>);
+
+
 }

@@ -123,8 +123,22 @@ export default function Signup({ handleToken }) {
                     {/* Le contenu de ma balise p dépend du state errorMsg */}
                     <p className={errorMsg && "red"}>{errorMsg}</p>
 
-                    <div>
 
+                    {/********************* upload de l'avatar ******************/}
+                    {/* <div>
+                        <input
+                            type="file"
+                            name="avatar"
+                            value={picture}
+                            onChange={(event) => {
+                                // console.log(event.target.files[0]);
+                                setPicture(event.target.files[0]);
+                            }}
+                        />
+                    </div> */}
+
+
+                    <div>
                         <input type="checkbox" name="newsletter" value={newsletter} onChange={
                             (event) => {
                                 console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
@@ -143,8 +157,8 @@ export default function Signup({ handleToken }) {
 
             </div>
             <div className="ligne-form">
-            <Link to={"/login"}> Tu as déjà un compte ? Connecte-toi !</Link>
-            <Link to={"/"}>retourner sur la page d'accueil</Link></div>
+                <Link to={"/login"}> Tu as déjà un compte ? Connecte-toi !</Link>
+                <Link to={"/"}>retourner sur la page d'accueil</Link></div>
         </div>
 
     </>);
