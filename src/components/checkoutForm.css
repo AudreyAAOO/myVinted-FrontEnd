@@ -1,6 +1,7 @@
 .containerPayment {
 	border: 2px solid #09adb6;
 	display: flex;
+	justify-content: space-between;
 	align-items: flex-start;
 	width: 50vw;
 	margin: 0 auto;
@@ -9,20 +10,19 @@
 .containerPayment > form {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
+	justify-content: space-between;
 }
 .section {
-	border-bottom: 2px solid #61ff1e;
-	margin: 30px 0;
-	display: inline-flex;
+	/*border-bottom: 2px solid #61ff1e;*/
+	margin: 10px 0;
+	font-weight: 400;
 }
 
-/* background-color: #4dc706; */
-
-.section:nth-child(even) {
-	border-bottom: 2px solid #ec6803;
+.section > span {
+	/*border-bottom: 2px solid #ec6803;*/
 	font-weight: 700;
+	display: flex;
+	justify-content: space-between;
 }
 
 h5 {
