@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-
+import axios from "axios";
 const CheckoutForm = () => {
 	const stripe = useStripe();
 	const elements = useElements();
@@ -15,17 +15,19 @@ const CheckoutForm = () => {
 		// Demande de création d'un token via l'API Stripe
 		// On envoie les données bancaires dans la requête
 		const stripeResponse = await stripe.createToken(cardElement, {
-			name: "L'id de l'acheteur",
+			name: "name",
 		});
 		console.log(stripeResponse);
 		const stripeToken = stripeResponse.token.id;
 		// Une fois le token reçu depuis l'API Stripe
 		// Requête vers notre serveur
 		// On envoie le token reçu depuis l'API Stripe
-		const response = await axios.post(   
-        urlPerso + `/user/pay`, {
-			stripeToken,
-		});
+		const response = await axios.post(
+			`https://site--myvinted--hw4gvwsxlwd5.code.run/user/pay`,
+			{
+				stripeToken,
+			}
+		);
 		console.log(response.data);
 		// Si la réponse du serveur est favorable, la transaction a eu lieu
 		if (response.data.status === "succeeded") {

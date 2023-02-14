@@ -63,6 +63,7 @@ export default function Login({ handleToken }) {
                         type="email"
                         placeholder="Email"
                         value={email}
+                        autoComplete="on"
                         onChange={
                             (event) => {
                                 console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
