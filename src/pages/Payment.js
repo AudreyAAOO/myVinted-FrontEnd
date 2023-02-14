@@ -1,11 +1,10 @@
-
+import "../components/checkoutForm.css";
 import { useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { useState } from "react";
 
 import CheckoutForm from "../components/CheckoutForm";
-import axios from "axios";
 
 
 // Je me connecte à mon compte stripe en front en fournissant ma clef publique
@@ -21,17 +20,14 @@ const stripePromise = loadStripe(
 const Payment = () => {
 
     const location = useLocation();
-    const { title } = location.state;
+    // destructuring
+    const { price, title, description, id } = location.state;
 
-
-
+    
     return (<>
-        <p> $$$$$$$$$$$$$$ </p>
-
-        <span>{title}</span>
 
         <Elements stripe={stripePromise}>
-            <CheckoutForm />
+            <CheckoutForm price={price} title={title} description={description} id={id} />
         </Elements>
 
     </>)

@@ -2,7 +2,7 @@ import "./offer.css";
 import userEmptyState from "../assets/img/userEmptyState.svg";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 
@@ -19,6 +19,10 @@ const Offer = ({ token }) => {
   const params = useParams();
   const id = params.id;
   //console.log(params);
+
+
+
+
 
 
   useEffect(() => {
@@ -47,23 +51,22 @@ const Offer = ({ token }) => {
   }, [id]);
 
 
+
+
+
+
   return isLoading ? (
     <p>Loading....</p>
   ) : (
     <section className="offer">
 
-
-
-
-      {/* on veut afficher plusieurs images alors on n'a plus besoin de data.product_image
-         &&
+      {/* on veut afficher plusieurs images alors on n'a plus besoin de data.product_image &&
           <img src={data.product_image.secure_url} alt="product" />
         } */}
 
 
       {data.product_pictures.map((image, index) => {
-        //console.log("test image.height : ", image.height);
-        //console.log("test image.secure_url : ", image.secure_url);
+
         return <div className="left-column">
           <img key={index} src={image.secure_url} alt="product" />
         </div>
@@ -74,7 +77,6 @@ const Offer = ({ token }) => {
         <Link to={"/"}>retourner sur la page d'accueil</Link>
 
         <p className="offerPrice">{data.product_price} €</p>
-
 
         {data.product_details.map((detail, index) => { // Je parcours product_details
 
@@ -109,13 +111,17 @@ const Offer = ({ token }) => {
         </div>
 
         {!token ? (
-          // <Navigate to="/login" />
           <Link to={"/login"}>
             <button className="offerButton">Acheter</button>
           </Link>
         ) : (
-          <Link to={"/payment"}>
-            <button className="offerButton">Acheter</button>
+          <Link to="/payment" state={{
+            price: data.product_price,
+            title: data.product_name,
+            description: data.product_description,
+            id: data.owner._id
+          }}>
+            <button className="offerButton" >Acheter</button>
           </Link>
         )}
 

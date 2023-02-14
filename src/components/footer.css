@@ -1,17 +1,14 @@
-
-
 .containerFooter {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
 }
 
-
 .footer {
-    background-color: lightgrey;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100px;
-    width: 100vw;
+	background-color: lightgrey;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100px;
+	width: 100vw;
 }
