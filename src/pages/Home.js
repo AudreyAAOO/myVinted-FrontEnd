@@ -9,8 +9,6 @@ import herobanner from "../assets/img/hero-img-fond.jpg";
 //import des components
 import OfferCard from "../components/OfferCard";
 
-
-
 export default function Home({ search }) {
     //! STATE 
     // State qui me sert à récupérer la data
@@ -47,8 +45,6 @@ export default function Home({ search }) {
         };
         fetchData();
     }, [search]);// pour déclencher un useEffect lors d'une recherche
-
-
 
 
 

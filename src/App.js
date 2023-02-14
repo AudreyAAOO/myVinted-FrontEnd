@@ -3,11 +3,6 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// import Stripe pour le paiement
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-
-
 
 //Pages
 import Home from './pages/Home';

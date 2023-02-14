@@ -10,7 +10,7 @@ const Offer = ({ token }) => {
 
   //! refaire une requête pour mettre les annonces à jour
   // State qui me sert à récupérer la data
-  const [data, setData] = useState([]); // ou ({}) ?? 
+  const [data, setData] = useState([]);
   // State qui me sert à savoir si la data a été récupérée
   const [isLoading, setIsLoading] = useState(true);
 
@@ -19,9 +19,6 @@ const Offer = ({ token }) => {
   const params = useParams();
   const id = params.id;
   //console.log(params);
-
-
-
 
 
 
@@ -50,11 +47,7 @@ const Offer = ({ token }) => {
     fetchData();
   }, [id]);
 
-
-
-
-
-
+  //! RENDER
   return isLoading ? (
     <p>Loading....</p>
   ) : (
@@ -119,15 +112,11 @@ const Offer = ({ token }) => {
             price: data.product_price,
             title: data.product_name,
             description: data.product_description,
-            id: data.owner._id
+            // id: data.owner._id
           }}>
             <button className="offerButton" >Acheter</button>
           </Link>
         )}
-
-
-
-
 
       </div>
 

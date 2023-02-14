@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
 
-const CheckoutForm = ({ price, title, description, id }) => {
+const CheckoutForm = ({ price, title, description }) => {
+	// id
 	//! STATE
 	const [isLoading, setIsLoading] = useState(false);
 	const [completed, setCompleted] = useState(false); // state pour le paiement fait/non fait
@@ -28,7 +29,7 @@ const CheckoutForm = ({ price, title, description, id }) => {
 			// Demande de création d'un token via l'API Stripe
 			// On envoie les données bancaires à STRIPE dans la requête pour qu'il valide le code de carte de l'utilisateur et qu'il me renvoie un token.
 			const stripeResponse = await stripe.createToken(cardElement, {
-				name: id,
+				name: "name",
 			});
 
 			const stripeToken = stripeResponse.token.id;
@@ -39,9 +40,9 @@ const CheckoutForm = ({ price, title, description, id }) => {
 			const response = await axios.post(
 				`https://site--myvinted--hw4gvwsxlwd5.code.run/payment`,
 				{
-					amount: {price},
+					amount: { price },
 					currency: "eur",
-					title: {title},
+					//title: { title },
 					description: { description },
 					token: stripeToken, // On envoie ici le token
 				}
@@ -66,7 +67,7 @@ const CheckoutForm = ({ price, title, description, id }) => {
 		<>
 			{!completed ? (
 				<div className="containerPayment">
-					<form style={{ width: "300px" }} onSubmit={handlePayment}>
+					<form onSubmit={handlePayment}>
 						<h4>Résumé de la commande</h4>
 
 						<div className="section">
@@ -92,10 +93,9 @@ const CheckoutForm = ({ price, title, description, id }) => {
 							allez payer {total} (frais de protection et frais de port inclus).
 						</p>
 						<div className="section">
-                        <h5>Informations bancaires pour le paiement</h5>
-                            <CardElement />
+							<h5>Informations bancaires</h5>
+							<CardElement />
 						</div>
-
 
 						<div className="section">
 							{completed ? (
