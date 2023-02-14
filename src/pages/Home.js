@@ -22,13 +22,16 @@ export default function Home({ search }) {
     useEffect(() => {
         console.log("---- useEffect executed ---- (*＾▽＾)／ ");
 
+const urlReacteur = `https://lereacteur-vinted-api.herokuapp.com`;
+const urlPerso = `https://site--myvinted--hw4gvwsxlwd5.code.run`;
+
         // Je déclare la fonction qui fait la requête
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    // `https://site--myvinted--hw4gvwsxlwd5.code.run/offers`
-                    `https://site--myvinted--hw4gvwsxlwd5.code.run/offers?title=${search}`
-                    // `https://lereacteur-vinted-api.herokuapp.com/offers?title=${search}`
+                    urlPerso + `/offers?title=${search}`,
+                   // urlReacteur + `/offers?title=${search}`,
+            
                 );
                 console.log(response.data);
                 // Je stocke le résultat dans data

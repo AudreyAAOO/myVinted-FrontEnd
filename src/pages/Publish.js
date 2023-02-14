@@ -49,7 +49,10 @@ export default function Publish({ token }) {
             console.log("formData:", formData);
 
             const response = await axios.post(
-                "https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish",
+                //"https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish",
+                urlPerso + `/offer/publish`,
+                // urlReacteur + `/offer/publish`,
+
                 formData,
                 {
                     headers: {
@@ -239,7 +242,7 @@ export default function Publish({ token }) {
                     <div className="ligne-form">
 
                         {picture && <img src={URL.createObjectURL(picture)} alt="preview" />}
-                        
+
                         {picture && <img src={URL.createObjectURL(picture)} alt="preview" />}
                     </div>
                 </form>
