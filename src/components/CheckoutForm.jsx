@@ -22,7 +22,8 @@ const CheckoutForm = () => {
 		// Une fois le token reçu depuis l'API Stripe
 		// Requête vers notre serveur
 		// On envoie le token reçu depuis l'API Stripe
-		const response = await axios.post("http://localhost:3100/pay", {
+		const response = await axios.post(   
+        urlPerso + `/user/pay`, {
 			stripeToken,
 		});
 		console.log(response.data);
