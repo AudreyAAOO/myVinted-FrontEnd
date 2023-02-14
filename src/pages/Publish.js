@@ -68,8 +68,6 @@ export default function Publish({ token }) {
         }
     }
 
-
-
     //! RENDER
     return !token ? (
         <Navigate to="/login" />
