@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // import { useState } from "react";
 // import Cookies from "js-cookie";
 
-const Header = ({ handleToken, token, search, setSearch }) => {
+const Header = ({ handleTokenAndId, token, search, setSearch }) => {
 	//! STATE
 
 	// const [isConnected, setIsConnected] = useState(false);
@@ -44,18 +44,15 @@ const Header = ({ handleToken, token, search, setSearch }) => {
 				<div className="containerButttons">
 					{/* Si le token existe, on affiche déconnexion, sinon s'inscrire et se connecter */}
 					{token ? (
-						<>
-							{/* // {getCookie ? ( */}
-							<button
-								className="headerButton"
-								onClick={() => {
-									// Cookies.remove("token-vinted");
-									handleToken(null);
-								}}
-							>
-								se déconnecter
-							</button>
-						</>
+						<button
+							className="headerButton"
+							onClick={() => {
+								// Cookies.remove("token-vinted");
+								handleTokenAndId(null, null);
+							}}
+						>
+							se déconnecter
+						</button>
 					) : (
 						<>
 							<Link to="/signup">

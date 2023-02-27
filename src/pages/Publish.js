@@ -50,7 +50,8 @@ export default function Publish({ token }) {
 
             const response = await axios.post(
                 //`https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish`,
-                `https://lereacteur-vinted-api.herokuapp.com/offer/publish`,
+                // `https://lereacteur-vinted-api.herokuapp.com/offer/publish`,
+                `https://myvinted.back.aikane.fr/offer/publish`,
                 // urlPerso + `/offer/publish`,
                 // urlReacteur + `/offer/publish`,
 

@@ -2,8 +2,7 @@ import "./offer.css";
 import userEmptyState from "../assets/img/userEmptyState.svg";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 
 const Offer = ({ token }) => {
@@ -19,7 +18,7 @@ const Offer = ({ token }) => {
   const params = useParams();
   const id = params.id;
   //console.log(params);
-
+  
 
   useEffect(() => {
     console.log("---- useEffect executed ---- (*＾▽＾)／ ");
@@ -28,10 +27,10 @@ const Offer = ({ token }) => {
       try {
         const response = await axios.get(
           //`https://site--myvinted--hw4gvwsxlwd5.code.run/offer/${id}`,
-          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`,
+          // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`,
+          `https://myvinted.back.aikane.fr/offer/${id}`,
           // urlPerso + `/offer/${id}`,
           // urlReacteur + `/offer/${id}`,
-
         );
         console.log("response.data: ", response.data);
         // Je stocke le résultat dans data
@@ -107,12 +106,7 @@ const Offer = ({ token }) => {
             <button className="offerButton">Acheter</button>
           </Link>
         ) : (
-          <Link to="/payment" state={{
-            price: data.product_price,
-            title: data.product_name,
-            description: data.product_description,
-            idAcheteur: data.owner._id
-          }}>
+          <Link to="/payment" data="null">
             <button className="offerButton" >Acheter</button>
           </Link>
         )}

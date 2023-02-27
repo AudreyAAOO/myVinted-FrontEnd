@@ -28,7 +28,8 @@ export default function Home({ search }) {
             try {
                 const response = await axios.get(
                     //`https://site--myvinted--hw4gvwsxlwd5.code.run/offers?title=${search}`,
-                    `https://lereacteur-vinted-api.herokuapp.com/offers?title=${search}`,
+                    // `https://lereacteur-vinted-api.herokuapp.com/offers?title=${search}`,
+                    `https://myvinted.back.aikane.fr/offers?title=${search}`,
                     //urlPerso + `/offers?title=${search}`,
                     // urlReacteur + `/offers?title=${search}`,
 

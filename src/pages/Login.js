@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 //import Cookies from "js-cookie";
 
-export default function Login({ handleToken }) {
+export default function Login({ handleTokenAndId }) {
     //! STATE
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -26,7 +26,8 @@ export default function Login({ handleToken }) {
             try {
                 const response = await axios.post(
                     //`https://site--myvinted--hw4gvwsxlwd5.code.run/user/login`,
-                    `https://lereacteur-vinted-api.herokuapp.com/user/login`,
+                    // `https://lereacteur-vinted-api.herokuapp.com/user/login`,
+                    `https://myvinted.back.aikane.fr/user/login`,
                     //urlPerso + `/user/login`,
                     // urlReacteur + `/user/login`,
                     {
@@ -39,7 +40,7 @@ export default function Login({ handleToken }) {
                 if (response.data.token) {
                     // Cookies.set("yourTokenVinted", response.data.token, { expires: 14 });
 
-                    handleToken(response.data.token);
+                    handleTokenAndId(response.data.token, response.data._id);
                     navigate("/publish");
                 }
 

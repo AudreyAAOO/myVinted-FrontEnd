@@ -5,7 +5,7 @@ import axios from "axios";
 // import Cookies from "js-cookie";
 // import Header from "../components/Header";
 
-export default function Signup({ handleToken }) {
+export default function Signup({ handleTokenAndId }) {
     //! STATE
     const [avatar, setAvatar] = useState();    // State qui va contenir l'avatar
     const [username, setUsername] = useState("");
@@ -50,9 +50,9 @@ export default function Signup({ handleToken }) {
 
                 const response = await axios.post(
                     //`https://site--myvinted--hw4gvwsxlwd5.code.run/user/signup`,
-                     `https://lereacteur-vinted-api.herokuapp.com/user/signup`,
-                    // urlPerso + `/user/signup`,
-                    // urlReacteur + `/user/signup`,
+                    //  `https://lereacteur-vinted-api.herokuapp.com/user/signup`,
+                    `https://myvinted.back.aikane.fr/user/signup`,
+
 
                     formData,
                     // {
@@ -72,7 +72,7 @@ export default function Signup({ handleToken }) {
                 if (response.data.token) {  //   Si je reçois bien un token
                     // Cookies.set("yourTokenVinted", response.data.token, { expires: 30 });
                     // Je l'enregistre dans mon state et mes cookies
-                    handleToken(response.data.token); // handleToken reçu en props
+                    handleTokenAndId(response.data.token, response.data._id); // handleToken reçu en props
                     console.log(`Bravo, vous avez soumis votre formulaire. Votre email est ${email}`);
                     console.log("token:", response.data.token);
                     navigate("/"); // Et je redirige vers Home

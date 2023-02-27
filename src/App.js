@@ -27,7 +27,9 @@ library.add(faMagnifyingGlass, faHeart, faCircleQuestion);
 
 // <FontAwesomeIcon icon="fa-regular fa-circle-question" />
 // <FontAwesomeIcon icon="fa-regular fa-magnifying-glass" /> 
+
 function App() {
+  
   //! STATE 
   // State qui me sert à récupérer la data
 
@@ -36,19 +38,23 @@ function App() {
   // - Sinon, null
   const [token, setToken] = useState(Cookies.get("yourTokenVinted") || null);
   const [search, setSearch] = useState("");
-
+  const [id, setId] = useState(Cookies.get("yourIdVinted") || null);
 
 
   //! COMPORTEMENTS 
 
   // Cette fonction permet de stocker le token dans le state et dans les cookies ou supprimer le token dans le state et dans les cookies
-  const handleToken = (token) => {
-    if (token) {
+  const handleTokenAndId = (token, id) => {
+    if (token && id) {
       setToken(token);
+      setId(id);
       Cookies.set("yourTokenVinted", token, { expires: 14 });
+      Cookies.set("yourIdVinted", id, { expires: 14 });
     } else {
       setToken(null);
+      setId(null);
       Cookies.remove("yourTokenVinted");
+      Cookies.remove("yourIdVinted");
     }
   };
 
@@ -60,18 +66,18 @@ function App() {
     <Router>
       {/* Mon Header apparait sur toutes mes pages */}
       <Header  /* Passer des props token à mon header */
-        handleToken={handleToken} token={token} search={search} setSearch={setSearch} />
+        handleToken={handleTokenAndId} token={token} search={search} setSearch={setSearch} />
 
       {/* Le composant Routes doit contenir toutes mes 'Route' il affiche un composant à la fois */}
       <Routes>
 
         {/* Pour chaque route, je précise son chemin et le composant qu'elle doit afficher */}
         <Route path="/" element={<Home search={search} />} />
-        <Route path="/signup" element={<Signup handleToken={handleToken} />} /> {/* Passer des props token à Signup */}
-        <Route path="/login" element={<Login handleToken={handleToken} />} /> {/* Passer des props token à Login */}
+        <Route path="/signup" element={<Signup handleTokenAndId={handleTokenAndId} />} /> {/* Passer des props token à Signup */}
+        <Route path="/login" element={<Login handleTokenAndId={handleTokenAndId} />} /> {/* Passer des props token à Login */}
         <Route path="/publish" element={<Publish token={token} />} />
         <Route path="/offer/:id" element={<Offer token={token} />} /> {/* chemin dynamique */}
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment" element={<Payment token={token} />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
 
