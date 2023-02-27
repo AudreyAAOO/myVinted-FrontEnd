@@ -51,7 +51,8 @@ export default function Publish({ token }) {
             const response = await axios.post(
                 //`https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish`,
                 // `https://lereacteur-vinted-api.herokuapp.com/offer/publish`,
-                `https://myvinted.back.aikane.fr/offer/publish`,
+                // `https://myvinted.back.aikane.fr/offer/publish`,
+                `http://127.0.0.1:3100/offer/publish`,
                 // urlPerso + `/offer/publish`,
                 // urlReacteur + `/offer/publish`,
 
@@ -92,6 +93,7 @@ export default function Publish({ token }) {
                                 <h4>+ Ajoute une photo</h4>
                             </label>
                             <input
+                                name="input_file"
                                 type="file"
                                 multiple="multiple"
                                 onChange={(event) => {
@@ -242,9 +244,7 @@ export default function Publish({ token }) {
 
                     {/* afficher l'image  */}
                     <div className="ligne-form">
-
                         {picture && <img src={URL.createObjectURL(picture)} alt="preview" />}
-
                         {picture && <img src={URL.createObjectURL(picture)} alt="preview" />}
                     </div>
                 </form>

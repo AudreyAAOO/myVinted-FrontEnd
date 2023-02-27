@@ -29,20 +29,21 @@ export default function Home({ search }) {
                 const response = await axios.get(
                     //`https://site--myvinted--hw4gvwsxlwd5.code.run/offers?title=${search}`,
                     // `https://lereacteur-vinted-api.herokuapp.com/offers?title=${search}`,
-                    `https://myvinted.back.aikane.fr/offers?title=${search}`,
+                    // `https://myvinted.back.aikane.fr/offers?title=${search}`,
+                    `http://127.0.0.1:3100/offers?title=${search}`,
                     //urlPerso + `/offers?title=${search}`,
                     // urlReacteur + `/offers?title=${search}`,
-
                 );
-                console.log(response.data);
+                console.log(response);
+                // console.log(response.data);
                 // Je stocke le résultat dans data
                 setData(response.data);
                 // Je fais paser isLoading à false
                 setIsLoading(false);
 
             } catch (error) {
-
                 console.log(error.message);
+                // console.log("erreur Home", error.response.data);
             }
         };
         fetchData();

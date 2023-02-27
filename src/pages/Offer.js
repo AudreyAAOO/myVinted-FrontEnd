@@ -28,7 +28,8 @@ const Offer = ({ token }) => {
         const response = await axios.get(
           //`https://site--myvinted--hw4gvwsxlwd5.code.run/offer/${id}`,
           // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`,
-          `https://myvinted.back.aikane.fr/offer/${id}`,
+          // `https://myvinted.back.aikane.fr/offer/${id}`,
+          `http://127.0.0.1:3100/offer/${id}`,
           // urlPerso + `/offer/${id}`,
           // urlReacteur + `/offer/${id}`,
         );
@@ -106,7 +107,12 @@ const Offer = ({ token }) => {
             <button className="offerButton">Acheter</button>
           </Link>
         ) : (
-          <Link to="/payment" state={{ product_name: "data.product_name", product_price: "data.product_price" }}>
+          <Link to="/payment"
+            state=
+            {{
+              product_name: "data.product_name",
+              product_price: "data.product_price"
+            }}>
             {/*pkoi yavait écrit  data="null" ?? */}
             <button className="offerButton" >Acheter</button>
           </Link>

@@ -29,7 +29,7 @@ library.add(faMagnifyingGlass, faHeart, faCircleQuestion);
 // <FontAwesomeIcon icon="fa-regular fa-magnifying-glass" /> 
 
 function App() {
-  
+
   //! STATE 
   // State qui me sert à récupérer la data
 
@@ -66,7 +66,7 @@ function App() {
     <Router>
       {/* Mon Header apparait sur toutes mes pages */}
       <Header  /* Passer des props token à mon header */
-        handleToken={handleTokenAndId} token={token} search={search} setSearch={setSearch} />
+        handleTokenAndId={handleTokenAndId} token={token} search={search} setSearch={setSearch} />
 
       {/* Le composant Routes doit contenir toutes mes 'Route' il affiche un composant à la fois */}
       <Routes>
