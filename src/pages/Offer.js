@@ -18,7 +18,7 @@ const Offer = ({ token }) => {
   const params = useParams();
   const id = params.id;
   //console.log(params);
-  
+
 
   useEffect(() => {
     console.log("---- useEffect executed ---- (*＾▽＾)／ ");
@@ -106,7 +106,8 @@ const Offer = ({ token }) => {
             <button className="offerButton">Acheter</button>
           </Link>
         ) : (
-          <Link to="/payment" data="null">
+          <Link to="/payment" state={{ product_name: "data.product_name", product_price: "data.product_price" }}>
+            {/*pkoi yavait écrit  data="null" ?? */}
             <button className="offerButton" >Acheter</button>
           </Link>
         )}

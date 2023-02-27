@@ -9,6 +9,7 @@ import CheckoutForm from "../components/CheckoutForm";
 const Payment = ({ token }) => {
 
     const location = useLocation();
+    
     // destructuring
     const { product_price, product_name } = location.state;
 
