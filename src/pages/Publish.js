@@ -18,6 +18,7 @@ export default function Publish({ token }) {
     const [condition, setCondition] = useState("");
     const [city, setCity] = useState("");
     const [price, setPrice] = useState("");
+    const [files, setFiles] = useState("");
     const [exchange, setExchange] = useState(false);
     const [imageToDisplay, setImageToDisplay] = useState();  // State qui va contenir la réponse du serveur
 
@@ -26,16 +27,15 @@ export default function Publish({ token }) {
 
     console.log("token : ", token);
     console.log("color : ", color);
-
-
+    
     const handlePublish = async (event) => {
         event.preventDefault();
         console.log("test event:", event);
         try {
 
             const formData = new FormData();// constructeur FormData
-
-            formData.append("picture", picture);
+  
+	    formData.append(`picture`, picture) 
             formData.append("title", title);
             formData.append("description", description);
             formData.append("brand)", brand);
@@ -45,6 +45,10 @@ export default function Publish({ token }) {
             formData.append("city", city);
             formData.append("price", price);
             formData.append("exchange", setExchange);
+
+	    for (let i = 0; i < files.length; i++) {
+		formData.append(`images`, files[i])
+	    }
 
             console.log("formData:", formData);
 
@@ -98,7 +102,8 @@ export default function Publish({ token }) {
                                 multiple="multiple"
                                 onChange={(event) => {
                                     // console.log(event.target.files[0]);
-                                    setPicture(event.target.files[0]);
+                                    setPicture(event.target.files[0]);                                    
+        			    setFiles(event.target.files);
                                 }}
                             // style={{ display: "none" }}
                             />
@@ -133,7 +138,7 @@ export default function Publish({ token }) {
                                 placeholder="ex: porté quelquefois, taille correctement"
                                 rows="5"
                                 cols="90"
-                                wrap="hard"
+                                wrap="hard"exchange
                                 maxLength="300"
                                 onChange={(event) => {
                                     setDescription(event.target.value);
