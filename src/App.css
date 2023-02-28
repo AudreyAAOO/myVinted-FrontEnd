@@ -25,4 +25,6 @@ width: 200px;
 .link-home {
 	display: flex;
 	justify-content: center;
+	padding: 20px 0;
+	font-weight: 700;
 }

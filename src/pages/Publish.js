@@ -18,6 +18,7 @@ export default function Publish({ token }) {
     const [condition, setCondition] = useState("");
     const [city, setCity] = useState("");
     const [price, setPrice] = useState("");
+    const [files, setFiles] = useState("");
     const [exchange, setExchange] = useState(false);
     const [imageToDisplay, setImageToDisplay] = useState();  // State qui va contenir la réponse du serveur
 
@@ -25,26 +26,31 @@ export default function Publish({ token }) {
     //! COMPORTEMENTS
 
     console.log("token : ", token);
-    console.log("color : ", color);
 
 
     const handlePublish = async (event) => {
         event.preventDefault();
-        console.log("test event:", event);
+        console.log("file:", picture); // voir les détails de l'image
         try {
 
             const formData = new FormData();// constructeur FormData
 
-            formData.append("picture", picture);
+            formData.append(`picture`, picture);
+            formData.append("upload_preset", "dqlooqdn");
             formData.append("title", title);
             formData.append("description", description);
-            formData.append("brand)", brand);
+            formData.append("brand", brand);
             formData.append("size", size);
             formData.append("color", color);
             formData.append("condition", condition);
             formData.append("city", city);
             formData.append("price", price);
             formData.append("exchange", setExchange);
+
+            for (let i = 0; i < files.length; i++) {
+                formData.append(`images`, files[i])
+            }
+
 
             console.log("formData:", formData);
 
@@ -53,8 +59,7 @@ export default function Publish({ token }) {
                 // `https://lereacteur-vinted-api.herokuapp.com/offer/publish`,
                 // `https://myvinted.back.aikane.fr/offer/publish`,
                 `http://127.0.0.1:3100/offer/publish`,
-                // urlPerso + `/offer/publish`,
-                // urlReacteur + `/offer/publish`,
+
 
                 formData,
                 {
@@ -64,9 +69,9 @@ export default function Publish({ token }) {
                     },
                 }
             );
-
-            setImageToDisplay(response.data);
             console.log("response axios :", response);
+            setImageToDisplay(response.data);
+
 
         } catch (error) {
             console.log("message: ", error.response);
@@ -93,12 +98,13 @@ export default function Publish({ token }) {
                                 <h4>+ Ajoute une photo</h4>
                             </label>
                             <input
-                                name="input_file"
+                                id="addPhoto"
                                 type="file"
                                 multiple="multiple"
                                 onChange={(event) => {
                                     // console.log(event.target.files[0]);
                                     setPicture(event.target.files[0]);
+                                    setFiles(event.target.files);
                                 }}
                             // style={{ display: "none" }}
                             />
@@ -127,13 +133,15 @@ export default function Publish({ token }) {
                         <div className="ligne-form">
                             <h4>Décris ton article </h4>
 
-                            <textarea value={description}
+                            <textarea
+                                value={description}
                                 type="textarea"
                                 name="description"
                                 placeholder="ex: porté quelquefois, taille correctement"
                                 rows="5"
                                 cols="90"
                                 wrap="hard"
+                                // exchange
                                 maxLength="300"
                                 onChange={(event) => {
                                     setDescription(event.target.value);
@@ -243,9 +251,9 @@ export default function Publish({ token }) {
                     <button className="button" type="submit">Ajouter</button>
 
                     {/* afficher l'image  */}
-                    <div className="ligne-form">
-                        {picture && <img src={URL.createObjectURL(picture)} alt="preview" />}
-                        {picture && <img src={URL.createObjectURL(picture)} alt="preview" />}
+                    <div >
+                        {picture && <img className="preview_img" src={URL.createObjectURL(picture)} alt="preview" />}
+
                     </div>
                 </form>
 
