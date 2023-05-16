@@ -9,11 +9,22 @@ import CheckoutForm from "../components/CheckoutForm";
 const Payment = ({ token }) => {
 
     const location = useLocation();
-    
-    // destructuring
-    const { product_price, product_name } = location.state;
 
- //! STRIPE    
+    // destructuring
+    console.log("location.state", location);
+    console.log("product_name", product_name);
+    console.log("product_price", product_price);
+    // if (product_price) {
+    //     const { product_price } = location.state;
+    // }
+    // if (product_name) {
+    //     const { product_name } = location.state;
+    // }
+    const { product_price, product_name } = location.state || {};
+
+    //const { product_price, product_name } = location.state;
+
+    //! STRIPE    
     // Je me connecte à mon compte stripe en front en fournissant ma clef publique
     const stripePromise = loadStripe(
         // perso "pk_test_51MbRPeA7BASDl2o24eqljvPtATOQzjj9YKrbsa2jHk8OvACetkOx8UvWYuieg0daXIetI5q4R0pL6MQrgp31r54o00z3qiKMNg"
@@ -22,8 +33,11 @@ const Payment = ({ token }) => {
     );
 
 
-    const fraisLivraison = Math.round((product_price / 20) * 100) / 100;
-    const fraisProtection = Math.round((product_price / 60) * 100) / 100; // avec toFixed(2); ?
+    //const fraisLivraison = Math.round((product_price / 20) * 100) / 100;
+    //const fraisProtection = Math.round((product_price / 60) * 100) / 100; // avec toFixed(2); ?
+
+    const fraisLivraison = 4;
+    const fraisProtection = 3;
 
     const total = product_price + fraisLivraison + fraisProtection;
 
@@ -31,7 +45,7 @@ const Payment = ({ token }) => {
     //! RENDER
     return token ? (<>
         <div className="containerPayment">
-            <form>
+            <section>
                 <div>
                     <h5>Résumé de la commande</h5>
                     <p>Commande :</p>
@@ -63,7 +77,7 @@ const Payment = ({ token }) => {
                     <CheckoutForm product_price={product_price} product_name={product_name} />
                 </Elements>
 
-            </form>
+            </section>
         </div>
 
     </>) : (

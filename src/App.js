@@ -79,7 +79,7 @@ function App() {
         <Route path="/offer/:id" element={<Offer token={token} />} /> {/* chemin dynamique */}
         <Route path="/payment" element={<Payment token={token} />} />
         <Route path="*" element={<Page404 />} />
-      </Routes>
+      </Routes>   
 
       {/* Mon Footer apparait sur toutes mes pages */}
       <Footer />

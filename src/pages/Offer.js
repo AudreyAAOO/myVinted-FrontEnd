@@ -29,9 +29,8 @@ const Offer = ({ token }) => {
           //`https://site--myvinted--hw4gvwsxlwd5.code.run/offer/${id}`,
           // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`,
           // `https://myvinted.back.aikane.fr/offer/${id}`,
-          `http://127.0.0.1:3100/offer/${id}`,
-          // urlPerso + `/offer/${id}`,
-          // urlReacteur + `/offer/${id}`,
+          `http://127.0.0.1:3200/offer/${id}`,
+
         );
         console.log("response.data: ", response.data);
         // Je stocke le résultat dans data
@@ -106,8 +105,10 @@ const Offer = ({ token }) => {
           <Link to={"/login"}>
             <button className="offerButton">Acheter</button>
           </Link>
-        ) : (
+        ) : ( 
+         console.log(data.product_price,data.product_name),
           <Link to="/payment"
+         
             state=
             {{
               product_name: "data.product_name",

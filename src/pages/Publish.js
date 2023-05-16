@@ -58,7 +58,7 @@ export default function Publish({ token }) {
                 //`https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish`,
                 // `https://lereacteur-vinted-api.herokuapp.com/offer/publish`,
                 // `https://myvinted.back.aikane.fr/offer/publish`,
-                `http://127.0.0.1:3100/offer/publish`,
+                `http://localhost:3200/offer/publish`,
 
 
                 formData,
@@ -75,6 +75,8 @@ export default function Publish({ token }) {
 
         } catch (error) {
             console.log("message: ", error.response);
+            console.log("message: ", error.response.data);
+            
         }
     }
 

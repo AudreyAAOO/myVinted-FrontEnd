@@ -52,7 +52,7 @@ export default function Signup({ handleTokenAndId }) {
                     //`https://site--myvinted--hw4gvwsxlwd5.code.run/user/signup`,
                     //  `https://lereacteur-vinted-api.herokuapp.com/user/signup`,
                     // `https://myvinted.back.aikane.fr/user/signup`,
-                    `http://127.0.0.1:3100/user/signup`,
+                    `http://127.0.0.1:3200/user/signup`,
 
                     formData,
                     // {
