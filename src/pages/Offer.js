@@ -26,10 +26,10 @@ const Offer = ({ token }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          //`https://site--myvinted--hw4gvwsxlwd5.code.run/offer/${id}`,
+          `https://site--myvinted--hw4gvwsxlwd5.code.run/offer/${id}`,
           // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`,
           // `https://myvinted.back.aikane.fr/offer/${id}`,
-          `http://127.0.0.1:3200/offer/${id}`,
+          //`http://127.0.0.1:3200/offer/${id}`,
 
         );
         console.log("response.data: ", response.data);
