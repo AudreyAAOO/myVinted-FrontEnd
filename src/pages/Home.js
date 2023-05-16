@@ -27,12 +27,12 @@ export default function Home({ search }) {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    //`https://site--myvinted--hw4gvwsxlwd5.code.run/offers?title=${search}`,
+                    `https://site--myvinted--hw4gvwsxlwd5.code.run/offers?title=${search}`,
                     // `https://lereacteur-vinted-api.herokuapp.com/offers?title=${search}`,
                     // `https://myvinted.back.aikane.fr/offers?title=${search}`,
-                    `http://localhost:3200/offers?title=${search}`,
-                    
-                                        
+                    //`http://localhost:3200/offers?title=${search}`,
+
+
                 );
                 console.log(response);
                 console.log(response.data);
@@ -47,7 +47,7 @@ export default function Home({ search }) {
             }
         };
         fetchData();
-        
+
     }, [search]);// pour déclencher un useEffect lors d'une recherche
 
 
