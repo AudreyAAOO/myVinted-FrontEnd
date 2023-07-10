@@ -2,8 +2,9 @@
 
 
 # Se connecter avec un compte test
-identifiant : UtilisateurSympa
-email : 
+identifiant : UtilisateurSympa \
+email : UtilisateurSympa@gmail.com
+mdp: L3C0d3CtropC001
 
 # Getting Started with Create React App
 
