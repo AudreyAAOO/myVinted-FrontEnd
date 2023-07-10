@@ -4,8 +4,7 @@
 
 :root {
 	--font-family: "Trip Sans", sans-serif;
-	--font-familyMedium: "Trip Sans Medium", sans-serif;
-    
+	--font-familyBold: "Trip Sans Medium", sans-serif; 
 }
 
 .container_page404 {
@@ -17,6 +16,7 @@
 	row-gap: 50px;
 	margin: 100px auto;
 	font-size: 30px;
+	font-family: var(--font-family);
 }
 .container_page404 > img{ 
 width: 200px;

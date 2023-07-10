@@ -7,6 +7,7 @@
 	background-color: #ebedee;
 	height: 100vh;
 	width: 100vw;
+	font-family: var(--font-family);
 }
 
 /* LEFT COLUMN **************************** */
@@ -27,65 +28,86 @@
 	background-color: #ffffff;
 	height: 80vh;
 	width: 30vw;
+	padding: 10px;
 }
-.right-column > a {
-	/*background-color: #e67a7a;*/
+
+.linkHome {
+	/* background-color: #e67a7a;  */
 	color: #09adb6;
-	font-size: 15px;
+	font-size: 20px;
 	font-style: italic;
 	display: flex;
 	justify-content: flex-end;
-	text-decoration: none;
+}
+
+.right-column > a:not(.linkHome) {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.right-column button {
+	height: 55px;
+	width: 320px;
+	border: 1px solid #09adb6;
+	border-radius: 5px;
+	background-color: #09adb6;
+	color: white;
+	font-size: 20px;
+	font-weight: 500;
+	cursor: pointer;
 }
 
 .offerPrice {
 	font-size: 30px;
-	font-weight: 700;
+	font-weight: 600;
 	margin: 20px 0;
 }
 
 .offerDetails {
-	/* border: 2px solid #552fca; */
 	font-size: 18px;
 	width: 100%;
 	display: inline-flex;
-	margin: 5px auto;
+	margin: 10px auto;
 }
 .offerDetails:nth-child(n) {
 	/* background-color: #4dc706; */
 	color: #2b2b2b;
-	width: 100%;
-	font-weight: 700;
+	font-family: var(--font-familyBold);
 }
 
 .clé {
 	/* background-color: #e67a7a; */
 	color: #666666;
+	margin-right: 1px;
 }
 
-/* .contenu {
-	/* background-color: #b9fa69; */
-/* position:absolute; */
-/* left:50%; 
-} */
+.contenu {
+	/* background-color: #b9fa69;  */
+	left: 50%;
+}
 
 .divOfferDetails:nth-child(n) {
-	/* background-color: #c9c2dd;
-	border: 2px solid #fe24e5; */
-	width: 130px;
+ /* border: 2px solid #fe24e5;  */
+	width: 200px;
 	margin-right: calc((100% / 2)-130px);
 }
 
 .offerName {
-	font-size: 25px;
-	font-weight: 700;
+	border: 2px solid #fe24e5;
+	font-size: 30px;
 	color: black;
-	margin: 20px 0;
+	margin-top: 40px;
+	font-weight: 500;
+	font-family: var(--font-family);
+	
 }
 .offerDescription {
+	border: 2px solid #fe24e5;
 	font-size: 20px;
+	text-align: justify;
 	color: #666666;
-	margin-bottom: 20px;
+	margin: 20px 0px ;
 }
 
 .offerAvatar {
@@ -93,12 +115,12 @@
 	display: flex;
 	align-items: center;
 	background-color: rgb(255, 255, 255);
-	margin-bottom: 40px;
+	margin: 40px;
 }
 
 .offerAvatar > img {
-	height: 55px;
-	width: 55px;
+	height: 100px;
+	width: 100px;
 	object-fit: cover;
 	border-radius: 50%;
 	margin-right: 10px;

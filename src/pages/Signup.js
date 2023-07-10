@@ -33,7 +33,7 @@ export default function Signup({ handleTokenAndId }) {
 
             try {
 
-                const formData = new FormData();// constructeur FormData
+                const formData = new FormData(); // constructeur FormData
 
                 formData.append("avatar", avatar);
                 formData.append("username", username);

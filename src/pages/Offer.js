@@ -65,7 +65,7 @@ const Offer = ({ token }) => {
 
 
       <div className="right-column">
-        <Link to={"/"}>retourner sur la page d'accueil</Link>
+        <Link to={"/"} className="linkHome">retourner sur la page d'accueil</Link>
 
         <p className="offerPrice">{data.product_price} €</p>
 
