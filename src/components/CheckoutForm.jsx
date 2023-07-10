@@ -74,7 +74,9 @@ const CheckoutForm = ({ product_name, product_price }) => {
 					<form onSubmit={handlePayment}>
 						<div className="sectionBank">
 							<h5>Informations bancaires</h5>
-							<CardElement />
+							<div className="cardElement">
+								<CardElement />
+							</div>
 						</div>
 
 						<div className="sectionButtonPayment">
@@ -90,6 +92,23 @@ const CheckoutForm = ({ product_name, product_price }) => {
 								</button>
 							)}
 						</div>
+
+						{/* {finalConfirmation && (
+					<div className="w-full h-full fixed top-0 left-0 bg-[#fff8] font-baloo text-xl">
+						<div className="max-w-3xl w-full fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#fff] px-10 py-6 rounded-3xl flex flex-col gap-5 items-center shadow-pg-item">
+							<p>
+								Votre trajet est bien réservé, vous allez recevoir un email de
+								confirmation
+							</p>
+							<Link
+								to={URL_HOME}
+								className="px-7 py-3 bg-pg-blue text-white rounded-full shadow-pg-item"
+							>
+								Retour à l'accueil
+							</Link>
+						</div>
+					</div>
+				)} */}
 					</form>
 				</div>
 			) : (

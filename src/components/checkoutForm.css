@@ -1,38 +1,53 @@
 .containerPayment {
 	border: 2px solid #09adb6;
 	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-	width: 50vw;
-	margin: 0 auto;
-	row-gap: 10px;
-}
-.containerPayment > form {
-	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: center;
+	align-items: center;
+	margin: 50px auto;
+	font-family: var(--font-family);
+	width: 70vw;
 }
+
+.containerPayment form {
+	width: 100%;
+}
+
+.sectionBank h5 {
+	padding: 15px 0;
+}
+.sectionBank .cardElement {
+	padding: 15px 0;
+	background-color: #e8ebdf;
+}
+
 .section {
-	/*border-bottom: 2px solid #61ff1e;*/
+	border: 3px solid #04fb08;
 	margin: 10px 0;
 	font-weight: 400;
 }
 
 .section > span {
-	/*border-bottom: 2px solid #ec6803;*/
+	border: 2px solid #ec0671;
 	font-weight: 700;
 	display: flex;
 	justify-content: space-between;
 }
 
 h5 {
-	font-weight: 700;
+	font-family: var(--font-familyBold);
+	font-size: x-large;
 }
 
 .sectionBank {
-	border-bottom: 2px solid #61ff1e;
+	border-bottom: 2px solid #09adb6;
 	margin: 30px 0;
 	width: 100%;
+}
+
+.sectionButtonPayment {
+	display: flex;
+	justify-content: center;
 }
 
 .buttonPayment {
@@ -44,5 +59,6 @@ h5 {
 	color: white;
 	font-size: 20px;
 	font-weight: 500;
+	font-family: var(--font-familyBold);
 	cursor: pointer;
 }

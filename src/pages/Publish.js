@@ -1,13 +1,16 @@
 import "./publish.css";
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import * as React from 'react';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import Button from '@mui/material/Button';
-// import TextField from '@mui/material/TextField';
 import axios from "axios";
 
+
+
 export default function Publish({ token }) {
+
+    const navigate = useNavigate();
+
     //! STATE
     const [picture, setPicture] = useState();    // State qui va contenir l'image sélectionnée
     const [title, setTitle] = useState("");
@@ -21,22 +24,27 @@ export default function Publish({ token }) {
     const [files, setFiles] = useState("");
     const [exchange, setExchange] = useState(false);
     const [imageToDisplay, setImageToDisplay] = useState();  // State qui va contenir la réponse du serveur
+    const [errorMsg, setErrorMsg] = useState("");
 
 
     //! COMPORTEMENTS
 
-    console.log("token : ", token);
-
+    // console.log("token : ", token);
 
     const handlePublish = async (event) => {
         event.preventDefault();
-        console.log("file:", picture); // voir les détails de l'image
+        setErrorMsg("");
+        // console.log("file:", picture); //voir les détails de l'image
+        if (picture === "" || title === "" || description === "" || brand === "" || size === "" || condition === "" || city === "" || price === "" || exchange === "" ) {
+            // console.log("Missing parameters");
+            setErrorMsg("Veuillez entrer tous les champs svp");
+        }
+
         try {
 
-            const formData = new FormData();// constructeur FormData
-
+            const formData = new FormData(); // constructeur FormData
             formData.append(`picture`, picture);
-            formData.append("upload_preset", "dqlooqdn");
+            // formData.append("upload_preset", "dqlooqdn");
             formData.append("title", title);
             formData.append("description", description);
             formData.append("brand", brand);
@@ -51,16 +59,11 @@ export default function Publish({ token }) {
                 formData.append(`images`, files[i])
             }
 
-
-            console.log("formData:", formData);
-
             const response = await axios.post(
-                `https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish`,
+                // `https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish`,
                 // `https://lereacteur-vinted-api.herokuapp.com/offer/publish`,
                 // `https://myvinted.back.aikane.fr/offer/publish`,
-                //`http://localhost:3200/offer/publish`,
-
-
+                `http://localhost:3200/offer/publish`,
                 formData,
                 {
                     headers: {
@@ -71,12 +74,12 @@ export default function Publish({ token }) {
             );
             console.log("response axios :", response);
             setImageToDisplay(response.data);
-
+            alert(`Votre annonce a bien été enregistrée !`);
+            navigate("/");
 
         } catch (error) {
             console.log("message: ", error.response);
             console.log("message: ", error.response.data);
-            
         }
     }
 
@@ -84,14 +87,10 @@ export default function Publish({ token }) {
     return !token ? (
         <Navigate to="/login" />
     ) : (<>
-
         <div className="cadreFormPublish" >
-
             <div className="formulaire-publish">
-                <h2 className="titreForm">vends ton article</h2>
+                <h2>vends ton article</h2>
                 <form onSubmit={handlePublish} id="form">
-
-
                     {/***************** INPUT ADD PHOTO */}
                     <div className="section-img-publish">
                         <div className="ligne-form-addFiles">
@@ -104,18 +103,11 @@ export default function Publish({ token }) {
                                 type="file"
                                 multiple="multiple"
                                 onChange={(event) => {
-                                    // console.log(event.target.files[0]);
                                     setPicture(event.target.files[0]);
                                     setFiles(event.target.files);
                                 }}
-                            // style={{ display: "none" }}
                             />
 
-
-                            {/* <div>
-                <Button type="file" id="addPhoto" name="addPhoto" accept="image/*,.jpg, .png, .jpeg"
-                    variant="contained">+ Ajoute une photo</Button>
-            </div> */}
                         </div>
                     </div>
                     {/***************** TITRE ET DESCRIPTION */}
@@ -249,6 +241,7 @@ export default function Publish({ token }) {
                                 je suis intéressé.e par les échanges</h4></div>
                     </div>
 
+                    <p className={errorMsg && "red"}>{errorMsg}</p>
 
                     <button className="button" type="submit">Ajouter</button>
 
