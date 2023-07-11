@@ -88,26 +88,25 @@
 }
 
 .divOfferDetails:nth-child(n) {
- /* border: 2px solid #fe24e5;  */
+	/* border: 2px solid #fe24e5;  */
 	width: 200px;
 	margin-right: calc((100% / 2)-130px);
 }
 
 .offerName {
-	border: 2px solid #fe24e5;
+	/* border: 2px solid #fe24e5; */
 	font-size: 30px;
 	color: black;
 	margin-top: 40px;
 	font-weight: 500;
 	font-family: var(--font-family);
-	
 }
 .offerDescription {
-	border: 2px solid #fe24e5;
+	/* border: 2px solid #fe24e5; */
 	font-size: 20px;
 	text-align: justify;
 	color: #666666;
-	margin: 20px 0px ;
+	margin: 20px 0px;
 }
 
 .offerAvatar {

@@ -3,7 +3,6 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
 //Pages
 import Home from './pages/Home';
 import Offer from './pages/Offer';
@@ -18,28 +17,19 @@ import Footer from "./components/Footer";
 import Header from './components/Header';
 
 //! import icônes
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core';
-// import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faHeart, faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 library.add(faMagnifyingGlass, faHeart, faCircleQuestion);
 
-// <FontAwesomeIcon icon="fa-regular fa-circle-question" />
-// <FontAwesomeIcon icon="fa-regular fa-magnifying-glass" /> 
-
 function App() {
-
   //! STATE 
-  // State qui me sert à récupérer la data
-
   // State dans lequel je stocke le token. Sa valeur de base sera :
   // - Si je trouve un cookie token, ce cookie
   // - Sinon, null
   const [token, setToken] = useState(Cookies.get("yourTokenVinted") || null);
   const [search, setSearch] = useState("");
   const [id, setId] = useState(Cookies.get("yourIdVinted") || null);
-
 
   //! COMPORTEMENTS 
 
@@ -57,7 +47,6 @@ function App() {
       Cookies.remove("yourIdVinted");
     }
   };
-
 
   //!RENDER
   return (

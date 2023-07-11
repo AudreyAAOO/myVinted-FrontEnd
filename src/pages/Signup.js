@@ -41,8 +41,6 @@ export default function Signup({ handleTokenAndId }) {
                 formData.append("password", password);
                 formData.append("newsletter", newsletter);
 
-                console.log("formData:", formData);
-
 
                 //   Requête axios :
                 // - Premier argument : l'url que j'interroge
@@ -51,7 +49,6 @@ export default function Signup({ handleTokenAndId }) {
                 const response = await axios.post(
                     `https://site--myvinted--hw4gvwsxlwd5.code.run/user/signup`,
                     //  `https://lereacteur-vinted-api.herokuapp.com/user/signup`,
-                    // `https://myvinted.back.aikane.fr/user/signup`,
                     //`http://127.0.0.1:3200/user/signup`,
 
                     formData,
@@ -74,8 +71,7 @@ export default function Signup({ handleTokenAndId }) {
                     // Je l'enregistre dans mon state et mes cookies
                     handleTokenAndId(response.data.token, response.data._id); // handleToken reçu en props
                     console.log(`Bravo, vous avez soumis votre formulaire. Votre email est ${email}`);
-                    console.log("token:", response.data.token);
-                    navigate("/"); // Et je redirige vers Home
+                    navigate("/"); 
                 }
 
             } catch (error) {
@@ -108,8 +104,7 @@ export default function Signup({ handleTokenAndId }) {
                         value={username}
                         onChange={
                             (event) => {
-                                console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
-                                setUsername(event.target.value);  // Je stocke dans mon state le contenu de mon input
+                                setUsername(event.target.value);
                             }
                         }
                     />
@@ -122,9 +117,7 @@ export default function Signup({ handleTokenAndId }) {
                         value={email}
                         onChange={
                             (event) => {
-                                console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
-                                setEmail(event.target.value);  // Je stocke dans mon state le contenu de mon input
-
+                                setEmail(event.target.value);
                             }
                         }
                     />
@@ -137,14 +130,11 @@ export default function Signup({ handleTokenAndId }) {
                         value={password}
                         onChange={
                             (event) => {
-                                console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
                                 setPassword(event.target.value);  // Je stocke dans mon state le contenu de mon input
                             }
                         }
                     />
-                    {/* Le contenu de ma balise p dépend du state errorMsg */}
                     <p className={errorMsg && "red"}>{errorMsg}</p>
-
 
                     {/********************* upload de l'avatar ******************/}
                     <div>
@@ -153,7 +143,6 @@ export default function Signup({ handleTokenAndId }) {
                             type="file"
                             name="avatar"
                             onChange={(event) => {
-                                console.log(event.target.files[0]);
                                 setAvatar(event.target.files[0]);
                             }}
                         />
@@ -163,7 +152,6 @@ export default function Signup({ handleTokenAndId }) {
                     <div>
                         <input type="checkbox" name="newsletter" value={newsletter} onChange={
                             (event) => {
-                                console.log(event.target.value);  //! event.target.value correspond au contenu de mon input           
                                 setNewsletter(!newsletter);  // Je stocke dans mon state le contenu de mon input
                             }
                         } />

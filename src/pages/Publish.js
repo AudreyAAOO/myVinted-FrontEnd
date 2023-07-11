@@ -2,9 +2,7 @@ import "./publish.css";
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import * as React from 'react';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-
 
 
 export default function Publish({ token }) {
@@ -13,6 +11,7 @@ export default function Publish({ token }) {
 
     //! STATE
     const [picture, setPicture] = useState();    // State qui va contenir l'image sélectionnée
+    const [files, setFiles] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [brand, setBrand] = useState("");
@@ -21,30 +20,22 @@ export default function Publish({ token }) {
     const [condition, setCondition] = useState("");
     const [city, setCity] = useState("");
     const [price, setPrice] = useState("");
-    const [files, setFiles] = useState("");
     const [exchange, setExchange] = useState(false);
-    const [imageToDisplay, setImageToDisplay] = useState();  // State qui va contenir la réponse du serveur
+    const [imageToDisplay, setImageToDisplay] = useState();  // va contenir la réponse du serveur
     const [errorMsg, setErrorMsg] = useState("");
 
 
     //! COMPORTEMENTS
-
-    // console.log("token : ", token);
-
     const handlePublish = async (event) => {
         event.preventDefault();
         setErrorMsg("");
-        // console.log("file:", picture); //voir les détails de l'image
-        if (picture === "" || title === "" || description === "" || brand === "" || size === "" || condition === "" || city === "" || price === "" || exchange === "" ) {
-            // console.log("Missing parameters");
+        if (picture === "" || title === "" || description === "" || brand === "" || size === "" || condition === "" || city === "" || price === "" || exchange === "") {
             setErrorMsg("Veuillez entrer tous les champs svp");
         }
 
         try {
-
             const formData = new FormData(); // constructeur FormData
             formData.append(`picture`, picture);
-            // formData.append("upload_preset", "dqlooqdn");
             formData.append("title", title);
             formData.append("description", description);
             formData.append("brand", brand);
@@ -57,6 +48,8 @@ export default function Publish({ token }) {
 
             for (let i = 0; i < files.length; i++) {
                 formData.append(`images`, files[i])
+                setFiles(files[i])
+                console.log(`images files[i]`, files[i]);
             }
 
             const response = await axios.post(
@@ -76,7 +69,6 @@ export default function Publish({ token }) {
             setImageToDisplay(response.data);
             alert(`Votre annonce a bien été enregistrée !`);
             navigate("/");
-
         } catch (error) {
             console.log("message: ", error.response);
             console.log("message: ", error.response.data);
@@ -94,9 +86,8 @@ export default function Publish({ token }) {
                     {/***************** INPUT ADD PHOTO */}
                     <div className="section-img-publish">
                         <div className="ligne-form-addFiles">
-                            {/* ajouter attribut pr plusieurs photos */}
                             <label htmlFor="addPhoto" className="addPhoto">
-                                <h4>+ Ajoute une photo</h4>
+                                <h4>+ Ajoute une ou plusieurs photos</h4>
                             </label>
                             <input
                                 id="addPhoto"
@@ -107,7 +98,6 @@ export default function Publish({ token }) {
                                     setFiles(event.target.files);
                                 }}
                             />
-
                         </div>
                     </div>
                     {/***************** TITRE ET DESCRIPTION */}
@@ -248,7 +238,8 @@ export default function Publish({ token }) {
                     {/* afficher l'image  */}
                     <div >
                         {picture && <img className="preview_img" src={URL.createObjectURL(picture)} alt="preview" />}
-
+                        {files && <img className="preview_img" src={URL.createObjectURL(files[0], files[1])} alt="preview" />}
+                        {/* // faire une boucle */}
                     </div>
                 </form>
 

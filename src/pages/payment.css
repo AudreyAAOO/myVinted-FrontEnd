@@ -1,0 +1,50 @@
+.containerPayment {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 50px auto;
+	font-family: var(--font-family);
+	width: 70vw;
+}
+
+.containerPayment h5 {
+	font-family: var(--font-familyBold);
+	font-size: large;
+}
+
+.section_shopping {
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: flex-start;
+	gap: 15px;
+}
+
+.section_shopping h4 {
+	font-family: var(--font-familyBold);
+	font-size: xx-large;
+}
+
+.section_fees {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+    font-family: var(--font-familyBold);
+}
+
+.section_total {
+	padding: 10px 0;
+	border-bottom: 1px solid #09adb6;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	gap: 20px;
+	height: fit-content;
+}
+
+.section_total p {
+	font-style: italic;
+    margin: 10px 0;
+}
