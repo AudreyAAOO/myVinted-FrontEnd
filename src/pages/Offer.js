@@ -38,8 +38,9 @@ const Offer = ({ token }) => {
           <img src={data.product_image.secure_url} alt="product" />
         } */}
       {data.product_pictures.map((image, index) => {
+        console.log('image ---> ', image.url);
         return <div key={index} className="left-column">
-          <img src={image.secure_url} alt="product" />
+          <img src={image.url} alt="product" />
         </div>
       })}
       <div className="right-column">

@@ -5,10 +5,10 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const CheckoutForm = ({ product_name, product_price }) => {
-	// idAcheteur
+	
 	//! STATE
 	const [isLoading, setIsLoading] = useState(false);
-	const [completed, setCompleted] = useState(false); // state pour le paiement fait/non fait
+	const [completed, setCompleted] = useState(false); 
 
 	//! COMPORTEMENT
 	const stripe = useStripe();
@@ -50,18 +50,17 @@ const CheckoutForm = ({ product_name, product_price }) => {
 			console.log("response.data", response.data);
 
 			// Si la réponse du serveur est favorable, la transaction a eu lieu
-
 			if (response.data === "succeeded") {
-				console.log("response.data", response.data);
+				console.log("if response.data", response.data);
 				setIsLoading(false);
 				setCompleted(true);
 			} else {
-				console.log("response.data", response.data);
-				console.log("erreur");
+				console.log("else response.data", response.data);
+				console.log("else erreur");
 			}
 		} catch (error) {
-			console.log("error.response.data", error.response.data);
-			console.log("error.response.status", error.response.status);
+			console.log("catch error.response.data", error.response.data);
+			console.log("catch error.response.status", error.response.status);
 		}
 	};
 

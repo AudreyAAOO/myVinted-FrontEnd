@@ -10,7 +10,8 @@ const Payment = ({ token }) => {
 
     const location = useLocation();
     const { product_price, product_name } = location.state || {};
-    console.log("location.state", location.state);
+    //? console.log("location.state", location.state);
+
     // destructuring =
     // if (product_price) {
     //     const { product_price } = location.state;

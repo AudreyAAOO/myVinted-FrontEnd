@@ -11,7 +11,7 @@ export default function Publish({ token }) {
 
     //! STATE
     const [picture, setPicture] = useState();    // State qui va contenir l'image sélectionnée
-    const [files, setFiles] = useState("");
+    const [files, setFiles] = useState();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [brand, setBrand] = useState("");
@@ -21,7 +21,7 @@ export default function Publish({ token }) {
     const [city, setCity] = useState("");
     const [price, setPrice] = useState("");
     const [exchange, setExchange] = useState(false);
-    const [imageToDisplay, setImageToDisplay] = useState();  // va contenir la réponse du serveur
+    const [imageToDisplay, setImageToDisplay] = useState([]);  // va contenir la réponse du serveur
     const [errorMsg, setErrorMsg] = useState("");
 
 
@@ -55,7 +55,6 @@ export default function Publish({ token }) {
             const response = await axios.post(
                 // `https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish`,
                 // `https://lereacteur-vinted-api.herokuapp.com/offer/publish`,
-                // `https://myvinted.back.aikane.fr/offer/publish`,
                 `http://localhost:3200/offer/publish`,
                 formData,
                 {
@@ -65,10 +64,10 @@ export default function Publish({ token }) {
                     },
                 }
             );
-            console.log("response axios :", response);
             setImageToDisplay(response.data);
             alert(`Votre annonce a bien été enregistrée !`);
             navigate("/");
+
         } catch (error) {
             console.log("message: ", error.response);
             console.log("message: ", error.response.data);
@@ -96,6 +95,12 @@ export default function Publish({ token }) {
                                 onChange={(event) => {
                                     setPicture(event.target.files[0]);
                                     setFiles(event.target.files);
+
+                                    let array = [];
+                                    for (let i = 0; i < event.target.files.length; i++) {
+                                        array.push(event.target.files[i]);
+                                    }
+                                    setImageToDisplay(array)
                                 }}
                             />
                         </div>
@@ -204,31 +209,18 @@ export default function Publish({ token }) {
                                 onChange={(event) => {
                                     setPrice(event.target.value);
                                 }}
+                            /> </div>
+                    </div>
+                    <div className="ligne-form">
+                        <h4>
+                            <input
+                                value={exchange}
+                                type="checkbox"
+                                onChange={() => {
+                                    setExchange(!exchange)
+                                }}
                             />
-                        </div>
-                        <div className="ligne-form">
-                            <h4>
-
-                                {/* {exchange ? (
-                                    <label
-                                        htmlFor="exchange"
-                                        className="checkbox-checked"
-                                    ></label>
-                                ) : (
-                                    <label
-                                        htmlFor="exchange"
-                                        className="checkbox-no-checked"
-                                    ></label>
-                                )} */}
-                                <input
-                                    value={exchange}
-                                    type="checkbox"
-                                    onChange={() => {
-                                        setExchange(!exchange)
-                                    }}
-
-                                />
-                                je suis intéressé.e par les échanges</h4></div>
+                            je suis intéressé.e par les échanges</h4>
                     </div>
 
                     <p className={errorMsg && "red"}>{errorMsg}</p>
@@ -238,8 +230,18 @@ export default function Publish({ token }) {
                     {/* afficher l'image  */}
                     <div >
                         {picture && <img className="preview_img" src={URL.createObjectURL(picture)} alt="preview" />}
-                        {files && <img className="preview_img" src={URL.createObjectURL(files[0], files[1])} alt="preview" />}
-                        {/* // faire une boucle */}
+
+                        {imageToDisplay.length > 1 &&
+                            imageToDisplay.map((img, i) => {
+                                //console.log("img :", img.name);
+                                // console.log("URL.createObjectURL(img) : ",URL.createObjectURL(img));
+                                return (
+                                    <div key={i}>
+                                        <p>{img.name}</p>
+                                        <img className="preview_img" src={URL.createObjectURL(img)} alt="preview" />
+                                    </div>
+                                )
+                            })}
                     </div>
                 </form>
 
