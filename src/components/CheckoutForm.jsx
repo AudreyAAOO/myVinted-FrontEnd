@@ -1,14 +1,14 @@
 import "./checkoutForm.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
 const CheckoutForm = ({ product_name, product_price }) => {
-	
 	//! STATE
 	const [isLoading, setIsLoading] = useState(false);
-	const [completed, setCompleted] = useState(false); 
+	const [completed, setCompleted] = useState(false);
 
 	//! COMPORTEMENT
 	const stripe = useStripe();
@@ -28,11 +28,9 @@ const CheckoutForm = ({ product_name, product_price }) => {
 			const stripeResponse = await stripe.createToken(cardElement, {
 				name: userId,
 			});
-			const stripeToken = stripeResponse.token.id;
-			//const stripeToken = stripeResponse.token.idAcheteur;
-			// console.log("stripeToken", stripeToken);
-			// console.log("stripeResponse", stripeResponse);
 
+			console.log("stripeResponse", stripeResponse.token.id);
+			// const newDate = new Date(); // date de la transaction
 			// Une fois le token reçu depuis l'API Stripe
 			//   Je fais une requête à mon back en envoyant le stripetoken
 			const response = await axios.post(
@@ -41,33 +39,59 @@ const CheckoutForm = ({ product_name, product_price }) => {
 				//`http://127.0.0.1:3200/payment`,
 				{
 					amount: product_price,
-					//currency: "eur",
+					currency: "eur",
 					title: product_name,
-					//description: { description },
-					token: stripeToken, // On envoie ici le token
+					description: `Paiement vinted pour : ${product_name}`,
+					source: stripeResponse.token.id, // On envoie ici le token
+					// date_of_payment: newDate,
+					// userId
 				}
 			);
 			console.log("response.data", response.data);
 
 			// Si la réponse du serveur est favorable, la transaction a eu lieu
-			if (response.data === "succeeded") {
+			if (response.data) {
 				console.log("if response.data", response.data);
 				setIsLoading(false);
 				setCompleted(true);
 			} else {
-				console.log("else response.data", response.data);
-				console.log("else erreur");
+				alert("Une erreur est survenue, veuillez réssayer.");
+				console.log("else erreur", response.data);
 			}
 		} catch (error) {
 			console.log("catch error.response.data", error.response.data);
-			console.log("catch error.response.status", error.response.status);
+			console.log(
+				"catch error.response.status",
+				error.response.status,
+				error.message
+			);
 		}
 	};
 
 	//! RENDER
 	return (
 		<>
-			{!completed ? (
+			{completed ? (
+				<>
+					<p>Paiement effectué, merci pour votre achat.</p>
+					<Link to={"/"}>Retour à l'accueil</Link>
+				</>
+			) : (
+				<form className="containerForm" onSubmit={handlePayment}>
+					<div className="sectionBank">
+						<h5>Informations bancaires</h5>
+						<div className="cardElement">
+							<CardElement />
+						</div>
+					</div>
+					<div className="sectionButtonPayment">
+						<button disabled={!stripe} type="submit" className="buttonPayment">
+							Payer
+						</button>
+					</div>
+				</form>
+			)}
+			{/* {!completed ? (
 				<form className="containerForm" onSubmit={handlePayment}>
 					<div className="sectionBank">
 						<h5>Informations bancaires</h5>
@@ -78,6 +102,7 @@ const CheckoutForm = ({ product_name, product_price }) => {
 					<div className="sectionButtonPayment">
 						{completed ? (
 							<p>Paiement effectué, merci pour votre achat.</p>
+							
 						) : (
 							<button
 								disabled={isLoading}
@@ -87,9 +112,8 @@ const CheckoutForm = ({ product_name, product_price }) => {
 								Payer
 							</button>
 						)}
-					</div>
-
-					{/* {finalConfirmation && (
+					</div> */}
+			{/* {finalConfirmation && (
 					<div className="w-full h-full fixed top-0 left-0 bg-[#fff8] font-baloo text-xl">
 						<div className="max-w-3xl w-full fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#fff] px-10 py-6 rounded-3xl flex flex-col gap-5 items-center shadow-pg-item">
 							<p>
@@ -105,10 +129,8 @@ const CheckoutForm = ({ product_name, product_price }) => {
 						</div>
 					</div>
 				)} */}
-				</form>
-			) : (
-				<span>Paiement effectué ! </span>
-			)}
+			{/* </form> ) : (<span>Paiement effectué ! </span>
+			)}*/}
 		</>
 	);
 };
