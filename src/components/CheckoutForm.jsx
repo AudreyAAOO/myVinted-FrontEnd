@@ -5,10 +5,10 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const CheckoutForm = ({ product_name, product_price }) => {
-	// idAcheteur
+	
 	//! STATE
 	const [isLoading, setIsLoading] = useState(false);
-	const [completed, setCompleted] = useState(false); // state pour le paiement fait/non fait
+	const [completed, setCompleted] = useState(false); 
 
 	//! COMPORTEMENT
 	const stripe = useStripe();
@@ -21,7 +21,7 @@ const CheckoutForm = ({ product_name, product_price }) => {
 
 			//! Je récupère les données bancaires de l'input CardElement
 			const cardElement = elements.getElement(CardElement);
-			console.log("cardElement", cardElement);
+			// console.log("cardElement", cardElement);
 
 			// Demande de création d'un token via l'API Stripe
 			// On envoie les données bancaires à STRIPE dans la requête pour qu'il valide le code de carte de l'utilisateur et qu'il me renvoie un token.
@@ -30,8 +30,8 @@ const CheckoutForm = ({ product_name, product_price }) => {
 			});
 			const stripeToken = stripeResponse.token.id;
 			//const stripeToken = stripeResponse.token.idAcheteur;
-			console.log("stripeToken", stripeToken);
-			console.log("stripeResponse", stripeResponse);
+			// console.log("stripeToken", stripeToken);
+			// console.log("stripeResponse", stripeResponse);
 
 			// Une fois le token reçu depuis l'API Stripe
 			//   Je fais une requête à mon back en envoyant le stripetoken
@@ -50,19 +50,17 @@ const CheckoutForm = ({ product_name, product_price }) => {
 			console.log("response.data", response.data);
 
 			// Si la réponse du serveur est favorable, la transaction a eu lieu
-
 			if (response.data === "succeeded") {
-				console.log("response.data", response.data);
-
+				console.log("if response.data", response.data);
 				setIsLoading(false);
 				setCompleted(true);
 			} else {
-				console.log("response.data", response.data);
-				console.log("erreur");
+				console.log("else response.data", response.data);
+				console.log("else erreur");
 			}
 		} catch (error) {
-			console.log("error.response.data", error.response.data);
-			console.log("error.response.status", error.response.status);
+			console.log("catch error.response.data", error.response.data);
+			console.log("catch error.response.status", error.response.status);
 		}
 	};
 
@@ -70,28 +68,44 @@ const CheckoutForm = ({ product_name, product_price }) => {
 	return (
 		<>
 			{!completed ? (
-				<div className="containerPayment">
-					<form onSubmit={handlePayment}>
-						<div className="sectionBank">
-							<h5>Informations bancaires</h5>
+				<form className="containerForm" onSubmit={handlePayment}>
+					<div className="sectionBank">
+						<h5>Informations bancaires</h5>
+						<div className="cardElement">
 							<CardElement />
 						</div>
+					</div>
+					<div className="sectionButtonPayment">
+						{completed ? (
+							<p>Paiement effectué, merci pour votre achat.</p>
+						) : (
+							<button
+								disabled={isLoading}
+								type="submit"
+								className="buttonPayment"
+							>
+								Payer
+							</button>
+						)}
+					</div>
 
-						<div className="sectionButtonPayment">
-							{completed ? (
-								<p>Paiement effectué, merci pour votre achat.</p>
-							) : (
-								<button
-									disabled={isLoading}
-									type="submit"
-									className="buttonPayment"
-								>
-									Payer
-								</button>
-							)}
+					{/* {finalConfirmation && (
+					<div className="w-full h-full fixed top-0 left-0 bg-[#fff8] font-baloo text-xl">
+						<div className="max-w-3xl w-full fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#fff] px-10 py-6 rounded-3xl flex flex-col gap-5 items-center shadow-pg-item">
+							<p>
+								Votre trajet est bien réservé, vous allez recevoir un email de
+								confirmation
+							</p>
+							<Link
+								to={URL_HOME}
+								className="px-7 py-3 bg-pg-blue text-white rounded-full shadow-pg-item"
+							>
+								Retour à l'accueil
+							</Link>
 						</div>
-					</form>
-				</div>
+					</div>
+				)} */}
+				</form>
 			) : (
 				<span>Paiement effectué ! </span>
 			)}

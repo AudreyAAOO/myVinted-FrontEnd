@@ -6,42 +6,26 @@ import { Link, useParams } from "react-router-dom";
 
 
 const Offer = ({ token }) => {
-
   //! refaire une requête pour mettre les annonces à jour
-  // State qui me sert à récupérer la data
   const [data, setData] = useState([]);
-  // State qui me sert à savoir si la data a été récupérée
   const [isLoading, setIsLoading] = useState(true);
-
 
   //! Je récupère l'id présent dans l'url
   const params = useParams();
   const id = params.id;
-  //console.log(params);
-
 
   useEffect(() => {
-    console.log("---- useEffect executed ---- (*＾▽＾)／ ");
-    // Je déclare la fonction qui fait la requête
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `https://site--myvinted--hw4gvwsxlwd5.code.run/offer/${id}`,
-          // `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`,
-          // `https://myvinted.back.aikane.fr/offer/${id}`,
-          //`http://127.0.0.1:3200/offer/${id}`,
-
         );
-        console.log("response.data: ", response.data);
-        // Je stocke le résultat dans data
         setData(response.data);
-        // Je fais paser isLoading à false
         setIsLoading(false);
       } catch (error) {
         console.log(error.message);
       }
     };
-
     fetchData();
   }, [id]);
 
@@ -50,80 +34,61 @@ const Offer = ({ token }) => {
     <p>Loading....</p>
   ) : (
     <section className="offer">
-
       {/* on veut afficher plusieurs images alors on n'a plus besoin de data.product_image &&
           <img src={data.product_image.secure_url} alt="product" />
         } */}
-
-
       {data.product_pictures.map((image, index) => {
-
-        return <div className="left-column">
-          <img key={index} src={image.secure_url} alt="product" />
+        console.log('image ---> ', image.url);
+        return <div key={index} className="left-column">
+          <img src={image.url} alt="product" />
         </div>
       })}
-
-
       <div className="right-column">
         <Link to={"/"} className="linkHome">retourner sur la page d'accueil</Link>
-
         <p className="offerPrice">{data.product_price} €</p>
-
         {data.product_details.map((detail, index) => { // Je parcours product_details
-
           const key = Object.keys(detail)[0]; // Je récupère le nom de la clé de detail
-          //console.log("key: ", key)
-          //console.log("detail[key]: ", detail[key])
-          return (<>
+          return (
             <div key={index} className="offerDetails">
-
               <div className="divOfferDetails">
                 <span className="clé">{key} : </span> {/* J'affiche le nom dela clef  */}
               </div>
               <div> <span className="contenu">{detail[key]}</span> {/* et son contenu */}
               </div>
             </div>
-          </>)
+          )
         })}
         <p className="offerName">{data.product_name}</p>
         <p className="offerDescription">{data.product_description}</p>
 
         <div className="offerAvatar">
-          {/* Si le vendeur a un avatar, je l'affiche */}
           {data.owner.account.avatar ? (
+            // Si le vendeur a un avatar, je l'affiche
             <img src={data.owner.account.avatar.secure_url} alt="owner" />
-            // {/* Sinon je mets un avatar par défault */}
           ) : (
+            // Sinon je mets un avatar par défault 
             <img src={userEmptyState} alt="owner" />
           )}
-
           <span>{data.owner.account.username}</span>
-
         </div>
 
         {!token ? (
           <Link to={"/login"}>
             <button className="offerButton">Acheter</button>
           </Link>
-        ) : ( 
-         console.log(data.product_price,data.product_name),
+        ) : (
           <Link to="/payment"
-         
+
             state=
             {{
-              product_name: "data.product_name",
-              product_price: "data.product_price"
+              product_name: data.product_name,
+              product_price: data.product_price,
             }}>
-            {/*pkoi yavait écrit  data="null" ?? */}
-            <button className="offerButton" >Acheter</button>
+            <button className="offerButton">Acheter</button>
           </Link>
         )}
-
       </div>
-
     </section >
   )
-
 }
-
 export default Offer;

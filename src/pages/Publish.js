@@ -1,15 +1,17 @@
 import "./publish.css";
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import * as React from 'react';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import Button from '@mui/material/Button';
-// import TextField from '@mui/material/TextField';
 import axios from "axios";
 
+
 export default function Publish({ token }) {
+
+    const navigate = useNavigate();
+
     //! STATE
     const [picture, setPicture] = useState();    // State qui va contenir l'image sélectionnée
+    const [files, setFiles] = useState();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [brand, setBrand] = useState("");
@@ -18,25 +20,22 @@ export default function Publish({ token }) {
     const [condition, setCondition] = useState("");
     const [city, setCity] = useState("");
     const [price, setPrice] = useState("");
-    const [files, setFiles] = useState("");
     const [exchange, setExchange] = useState(false);
-    const [imageToDisplay, setImageToDisplay] = useState();  // State qui va contenir la réponse du serveur
+    const [imageToDisplay, setImageToDisplay] = useState([]);  // va contenir la réponse du serveur
+    const [errorMsg, setErrorMsg] = useState("");
 
 
     //! COMPORTEMENTS
-
-    console.log("token : ", token);
-
-
     const handlePublish = async (event) => {
         event.preventDefault();
-        console.log("file:", picture); // voir les détails de l'image
+        setErrorMsg("");
+        if (picture === "" || title === "" || description === "" || brand === "" || size === "" || condition === "" || city === "" || price === "" || exchange === "") {
+            setErrorMsg("Veuillez entrer tous les champs svp");
+        }
+
         try {
-
-            const formData = new FormData();// constructeur FormData
-
+            const formData = new FormData(); // constructeur FormData
             formData.append(`picture`, picture);
-            formData.append("upload_preset", "dqlooqdn");
             formData.append("title", title);
             formData.append("description", description);
             formData.append("brand", brand);
@@ -49,18 +48,14 @@ export default function Publish({ token }) {
 
             for (let i = 0; i < files.length; i++) {
                 formData.append(`images`, files[i])
+                setFiles(files[i])
+                console.log(`images files[i]`, files[i]);
             }
 
-
-            console.log("formData:", formData);
-
             const response = await axios.post(
-                `https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish`,
+                // `https://site--myvinted--hw4gvwsxlwd5.code.run/offer/publish`,
                 // `https://lereacteur-vinted-api.herokuapp.com/offer/publish`,
-                // `https://myvinted.back.aikane.fr/offer/publish`,
-                //`http://localhost:3200/offer/publish`,
-
-
+                `http://localhost:3200/offer/publish`,
                 formData,
                 {
                     headers: {
@@ -69,14 +64,13 @@ export default function Publish({ token }) {
                     },
                 }
             );
-            console.log("response axios :", response);
             setImageToDisplay(response.data);
-
+            alert(`Votre annonce a bien été enregistrée !`);
+            navigate("/");
 
         } catch (error) {
             console.log("message: ", error.response);
             console.log("message: ", error.response.data);
-            
         }
     }
 
@@ -84,38 +78,31 @@ export default function Publish({ token }) {
     return !token ? (
         <Navigate to="/login" />
     ) : (<>
-
         <div className="cadreFormPublish" >
-
             <div className="formulaire-publish">
-                <h2 className="titreForm">vends ton article</h2>
+                <h2>vends ton article</h2>
                 <form onSubmit={handlePublish} id="form">
-
-
                     {/***************** INPUT ADD PHOTO */}
                     <div className="section-img-publish">
                         <div className="ligne-form-addFiles">
-                            {/* ajouter attribut pr plusieurs photos */}
                             <label htmlFor="addPhoto" className="addPhoto">
-                                <h4>+ Ajoute une photo</h4>
+                                <h4>+ Ajoute une ou plusieurs photos</h4>
                             </label>
                             <input
                                 id="addPhoto"
                                 type="file"
                                 multiple="multiple"
                                 onChange={(event) => {
-                                    // console.log(event.target.files[0]);
                                     setPicture(event.target.files[0]);
                                     setFiles(event.target.files);
+
+                                    let array = [];
+                                    for (let i = 0; i < event.target.files.length; i++) {
+                                        array.push(event.target.files[i]);
+                                    }
+                                    setImageToDisplay(array)
                                 }}
-                            // style={{ display: "none" }}
                             />
-
-
-                            {/* <div>
-                <Button type="file" id="addPhoto" name="addPhoto" accept="image/*,.jpg, .png, .jpeg"
-                    variant="contained">+ Ajoute une photo</Button>
-            </div> */}
                         </div>
                     </div>
                     {/***************** TITRE ET DESCRIPTION */}
@@ -222,33 +209,21 @@ export default function Publish({ token }) {
                                 onChange={(event) => {
                                     setPrice(event.target.value);
                                 }}
+                            /> </div>
+                    </div>
+                    <div className="ligne-form">
+                        <h4>
+                            <input
+                                value={exchange}
+                                type="checkbox"
+                                onChange={() => {
+                                    setExchange(!exchange)
+                                }}
                             />
-                        </div>
-                        <div className="ligne-form">
-                            <h4>
-
-                                {/* {exchange ? (
-                                    <label
-                                        htmlFor="exchange"
-                                        className="checkbox-checked"
-                                    ></label>
-                                ) : (
-                                    <label
-                                        htmlFor="exchange"
-                                        className="checkbox-no-checked"
-                                    ></label>
-                                )} */}
-                                <input
-                                    value={exchange}
-                                    type="checkbox"
-                                    onChange={() => {
-                                        setExchange(!exchange)
-                                    }}
-
-                                />
-                                je suis intéressé.e par les échanges</h4></div>
+                            je suis intéressé.e par les échanges</h4>
                     </div>
 
+                    <p className={errorMsg && "red"}>{errorMsg}</p>
 
                     <button className="button" type="submit">Ajouter</button>
 
@@ -256,6 +231,17 @@ export default function Publish({ token }) {
                     <div >
                         {picture && <img className="preview_img" src={URL.createObjectURL(picture)} alt="preview" />}
 
+                        {imageToDisplay.length > 1 &&
+                            imageToDisplay.map((img, i) => {
+                                //console.log("img :", img.name);
+                                // console.log("URL.createObjectURL(img) : ",URL.createObjectURL(img));
+                                return (
+                                    <div key={i}>
+                                        <p>{img.name}</p>
+                                        <img className="preview_img" src={URL.createObjectURL(img)} alt="preview" />
+                                    </div>
+                                )
+                            })}
                     </div>
                 </form>
 
